@@ -65,7 +65,7 @@ public class HMM_VQ_Speech_Recognition extends JFrame {
 	private JButton btnNewButton_2;
 
 	/**
-	 * This is the default constructor
+	 * 默认构造函数
 	 */
 	public HMM_VQ_Speech_Recognition() {
 		super();
@@ -74,9 +74,7 @@ public class HMM_VQ_Speech_Recognition extends JFrame {
 	}
 
 	/**
-	 * This method initializes this
-	 *
-	 * @return void
+	 * 初始化方法
 	 */
 	private void initialize() {
 		this.setSize(485, 335);
@@ -85,8 +83,7 @@ public class HMM_VQ_Speech_Recognition extends JFrame {
 	}
 
 	/**
-	 * This method initializes jTabbedPane
-	 *
+	 * 初始化jTabbedPane
 	 * @return javax.swing.JTabbedPane
 	 */
 	private JTabbedPane getJTabbedPane() {
@@ -140,8 +137,7 @@ public class HMM_VQ_Speech_Recognition extends JFrame {
 	}
 
 	/**
-	 * This method initializes jPanel
-	 *
+	 * 初始化jPanel
 	 * @return javax.swing.JPanel
 	 */
 	private JPanel getVerifyWordPanel() {
@@ -183,8 +179,7 @@ public class HMM_VQ_Speech_Recognition extends JFrame {
 	}
 
 	/**
-	 * This method initializes jPanel1
-	 *
+	 * 初始化jPanel1
 	 * @return javax.swing.JPanel
 	 */
 	private JPanel getAddSamplePanel() {
@@ -202,8 +197,7 @@ public class HMM_VQ_Speech_Recognition extends JFrame {
 	}
 
 	/**
-	 * This method initializes runTrainingPanel
-	 *
+	 * 初始化runTrainingPanel
 	 * @return javax.swing.JPanel
 	 */
 	private JPanel getRunTrainingPanel() {
@@ -217,8 +211,7 @@ public class HMM_VQ_Speech_Recognition extends JFrame {
 	}
 
 	/**
-	 * This method initializes getWordButton
-	 *
+	 * 初始化getWordButton
 	 * @return javax.swing.JButton
 	 */
 	private JButton getGetWordButton() {
@@ -239,8 +232,7 @@ public class HMM_VQ_Speech_Recognition extends JFrame {
 	}
 
 	/**
-	 * This method initializes wordsComboBox
-	 *
+	 * 初始化wordsComboBox
 	 * @return javax.swing.JComboBox
 	 */
 	private JComboBox<String> getWordsComboBoxVerify() {
@@ -285,8 +277,7 @@ public class HMM_VQ_Speech_Recognition extends JFrame {
 	}
 
 	/**
-	 * This method initializes getWordButton1
-	 *
+	 * 初始化getWordButton1
 	 * @return javax.swing.JButton
 	 */
 	private JButton getGetWordButton1() {
@@ -307,8 +298,7 @@ public class HMM_VQ_Speech_Recognition extends JFrame {
 	}
 
 	/**
-	 * This method initializes jContentPane
-	 *
+	 * 初始化jContentPane
 	 * @return javax.swing.JPanel
 	 */
 	private JPanel getJContentPane() {
@@ -350,8 +340,7 @@ public class HMM_VQ_Speech_Recognition extends JFrame {
 	}
 
 	/**
-	 * This method initializes addWordToCombo
-	 *
+	 * 初始化addWordToCombo
 	 * @return javax.swing.JTextField
 	 */
 	private JTextField getAddWordToCombo() {
@@ -363,8 +352,7 @@ public class HMM_VQ_Speech_Recognition extends JFrame {
 	}
 
 	/**
-	 * This method initializes addWordToComboBtn
-	 *
+	 * 初始化addWordToComboBtn
 	 * @return javax.swing.JButton
 	 */
 	private JButton getAddWordToComboBtn() {
@@ -376,14 +364,14 @@ public class HMM_VQ_Speech_Recognition extends JFrame {
 					String newWord = getAddWordToCombo().getText();
 					boolean isAlreadyRegistered = false;
 					if (!newWord.isEmpty()) {
-						// already in combo box
+						// 已经存在combo box中
 						for (int i = 0; i < getWordsComboBoxAddWord().getItemCount(); i++) {
 							if (getWordsComboBoxAddWord().getItemAt(i).toString().equalsIgnoreCase(newWord)) {
 								isAlreadyRegistered = true;
 								break;
 							}
 						}
-						// if not add
+						// 没有添加
 						if (!isAlreadyRegistered) {
 							getWordsComboBoxAddWord().addItem(getAddWordToCombo().getText());
 							getWordsComboBoxAddWord().repaint();
@@ -398,8 +386,7 @@ public class HMM_VQ_Speech_Recognition extends JFrame {
 	}
 
 	/**
-	 * This method initializes addTrainSample
-	 *
+	 * 初始化addTrainSample
 	 * @return javax.swing.JButton
 	 */
 	public JButton getAddTrainSampleBtn() {
@@ -425,9 +412,6 @@ public class HMM_VQ_Speech_Recognition extends JFrame {
 		return addTrainSampleBtn;
 	}
 
-	/**
-	 * @param args
-	 */
 	public static void main(String[] args) {
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());

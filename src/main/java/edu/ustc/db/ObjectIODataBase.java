@@ -12,14 +12,8 @@ public class ObjectIODataBase implements DataBase {
 	 */
 	String type;
 
-	/**
-	 *
-	 */
 	String[] modelFiles;
 
-	/**
-	 *
-	 */
 	String[] userNames;
 	String CURRENTFOLDER;
 

@@ -18,22 +18,19 @@ public class ArrayWriter {
 	}
 
 	/**
-	 * saves the @param array to file : @param fileName
-	 *
-	 * @param array
-	 *            input array
-	 * @param fileName
-	 *            output file
+	 * 保存数组数据到文件中
+	 * @param array      输入数组
+	 * @param fileName   输出文件
 	 */
 	public static void printIntArrayToFile(int[] array, String fileName) {
-		// get formatter object with @param fileName
+		// 通过参数fileName获取formatter对象
 		try {
 			formatter = new Formatter(fileName);
 		} catch (FileNotFoundException e) {
 			System.err.println("File Not Found Exception :" + fileName);
 			return;
 		}
-		// write the array
+		// 写数组
 		// formatter.format("****** Array's Length %d ******", array.length);
 		for (int i = 0; i < array.length; i++) {
 			formatter.format("%d\n", array[i]);
@@ -43,10 +40,8 @@ public class ArrayWriter {
 	}
 
 	/**
-	 * display @param array 's content to console
-	 *
-	 * @param array
-	 *            input array
+	 * 打印数组的内容到控制台
+	 * @param array：输入数组
 	 */
 	public static void printIntArrayToConole(int[] array) {
 		for (int i = 0; i < array.length; i++) {

@@ -2,6 +2,12 @@ package edu.ustc.util;
 
 import javax.swing.JLabel;
 
+/**
+ * 异常管理类
+ *
+ * @author wanggang
+ *
+ */
 public class ErrorManager {
 
 	private static ErrorManager em = new ErrorManager();
