@@ -81,7 +81,7 @@ public class HMM_VQ_Speech_Recognition extends JFrame {
 	private void initialize() {
 		this.setSize(485, 335);
 		this.setContentPane(getJContentPane());
-		this.setTitle("HMM/VQ Speech Recognition - by GT");
+		this.setTitle("HMM/VQ语音识别");
 	}
 
 	/**
@@ -93,9 +93,9 @@ public class HMM_VQ_Speech_Recognition extends JFrame {
 		if (jTabbedPane == null) {
 			jTabbedPane = new JTabbedPane();
 			jTabbedPane.setBounds(new Rectangle(10, 94, 449, 178));
-			jTabbedPane.addTab("Verify Word", null, getVerifyWordPanel(), null);
-			jTabbedPane.addTab("Add Sample", null, getAddSamplePanel(), null);
-			jTabbedPane.addTab("Run HMM Train", null, getRunTrainingPanel(), null);
+			jTabbedPane.addTab("验证词语", null, getVerifyWordPanel(), null);
+			jTabbedPane.addTab("添加样本", null, getAddSamplePanel(), null);
+			jTabbedPane.addTab("运行HMM训练", null, getRunTrainingPanel(), null);
 			jTabbedPane.addChangeListener(new ChangeListener() {
 
 				@Override
@@ -115,7 +115,7 @@ public class HMM_VQ_Speech_Recognition extends JFrame {
 	}
 
 	private File getTestFile() {
-		JFileChooser jfc = new JFileChooser("Select WAVE File to Verify");
+		JFileChooser jfc = new JFileChooser("选择WAVE文件验证");
 		jfc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
 		jfc.setSize(new Dimension(541, 326));
 		jfc.setFileFilter(new javax.swing.filechooser.FileFilter() {
@@ -148,7 +148,7 @@ public class HMM_VQ_Speech_Recognition extends JFrame {
 		if (verifyPanel == null) {
 			JLabel jLabel = new JLabel();
 			jLabel.setBounds(new Rectangle(13, 55, 245, 20));
-			jLabel.setText("Or... Select a Word From the List to Verify");
+			jLabel.setText("或者...从列表中选择词语来验证");
 			verifyPanel = new JPanel();
 			verifyPanel.setLayout(null);
 			verifyPanel.add(getGetWordButton(), null);
@@ -163,16 +163,16 @@ public class HMM_VQ_Speech_Recognition extends JFrame {
 
 	private JButton getBtnVerify() {
 		if (btnVerify == null) {
-			btnVerify = new JButton("Verify");
+			btnVerify = new JButton("验证");
 			btnVerify.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					if (soundCapture.isSoundDataAvailable() && getWordsComboBoxVerify().getItemCount() > 0) {
 						String recWord = opr.hmmGetWordFromAmplitureArray(soundCapture.getAudioData());
 						if (recWord.equalsIgnoreCase(getWordsComboBoxVerify().getSelectedItem().toString())) {
-							getStatusLblRecognize().setText("Verified");
+							getStatusLblRecognize().setText("已经验证");
 						} else {
-							getStatusLblRecognize().setText("Not Verified");
+							getStatusLblRecognize().setText("没有验证");
 						}
 					}
 				}
@@ -223,7 +223,7 @@ public class HMM_VQ_Speech_Recognition extends JFrame {
 	 */
 	private JButton getGetWordButton() {
 		if (getWordButton == null) {
-			getWordButton = new JButton("Recognize With Just Recorded");
+			getWordButton = new JButton("使用刚才的录音来识别");
 			getWordButton.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
@@ -291,7 +291,7 @@ public class HMM_VQ_Speech_Recognition extends JFrame {
 	 */
 	private JButton getGetWordButton1() {
 		if (getWordButton1 == null) {
-			getWordButton1 = new JButton("Recognize a Saved WAV File");
+			getWordButton1 = new JButton("识别一个已经保存的WAV文件");
 			getWordButton1.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
@@ -332,7 +332,7 @@ public class HMM_VQ_Speech_Recognition extends JFrame {
 
 	private JLabel getAboutLBL() {
 		if (aboutLBL == null) {
-			aboutLBL = new JLabel("Developer: Ganesh Tiwari,Visit ganeshtiwaridotcomdotnp.blogspot.com For MORE ");
+			aboutLBL = new JLabel("开发者: 何长婷");
 			aboutLBL.setHorizontalAlignment(SwingConstants.CENTER);
 			aboutLBL.setFont(new Font("Tahoma", Font.PLAIN, 11));
 			aboutLBL.setBounds(10, 275, 449, 16);
@@ -369,7 +369,7 @@ public class HMM_VQ_Speech_Recognition extends JFrame {
 	 */
 	private JButton getAddWordToComboBtn() {
 		if (addWordToComboBtn == null) {
-			addWordToComboBtn = new JButton("Add Word");
+			addWordToComboBtn = new JButton("添加词语");
 			addWordToComboBtn.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
@@ -404,7 +404,7 @@ public class HMM_VQ_Speech_Recognition extends JFrame {
 	 */
 	private JButton getAddTrainSampleBtn() {
 		if (addTrainSampleBtn == null) {
-			addTrainSampleBtn = new JButton("Record");
+			addTrainSampleBtn = new JButton("录音");
 			addTrainSampleBtn.setBounds(new Rectangle(223, 103, 141, 24));
 			addTrainSampleBtn.addActionListener(new ActionListener() {
 				@Override
@@ -448,7 +448,7 @@ public class HMM_VQ_Speech_Recognition extends JFrame {
 
 	private JLabel getLblChooseAWord() {
 		if (lblChooseAWord == null) {
-			lblChooseAWord = new JLabel("Choose a word to record sound and save to corresponding folder");
+			lblChooseAWord = new JLabel("选择一个词语录音并保存到相应的目录");
 			lblChooseAWord.setBounds(11, 77, 325, 14);
 		}
 		return lblChooseAWord;
@@ -456,7 +456,7 @@ public class HMM_VQ_Speech_Recognition extends JFrame {
 
 	private JLabel getLblAddANew() {
 		if (lblAddANew == null) {
-			lblAddANew = new JLabel("Add a new Word");
+			lblAddANew = new JLabel("增加一个新词语");
 			lblAddANew.setBounds(11, 11, 126, 14);
 		}
 		return lblAddANew;
@@ -464,7 +464,7 @@ public class HMM_VQ_Speech_Recognition extends JFrame {
 
 	private JButton getGenerateCodeBookBtn() {
 		if (generateCodeBookBtn == null) {
-			generateCodeBookBtn = new JButton("Generate CodeBook");
+			generateCodeBookBtn = new JButton("生成CodeBook");
 			generateCodeBookBtn.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
@@ -478,7 +478,7 @@ public class HMM_VQ_Speech_Recognition extends JFrame {
 
 	private JButton getBtnNewButton_2() {
 		if (btnNewButton_2 == null) {
-			btnNewButton_2 = new JButton("Train HMM");
+			btnNewButton_2 = new JButton("训练HMM");
 			btnNewButton_2.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
@@ -489,4 +489,5 @@ public class HMM_VQ_Speech_Recognition extends JFrame {
 		}
 		return btnNewButton_2;
 	}
+
 }

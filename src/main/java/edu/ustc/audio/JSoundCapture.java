@@ -93,10 +93,10 @@ public class JSoundCapture extends JPanel implements ActionListener {
 		JPanel buttonsPanel = new JPanel();
 		buttonsPanel.setPreferredSize(new Dimension(200, 50));
 		buttonsPanel.setBorder(new EmptyBorder(5, 0, 1, 0));
-		playB = addButton("Play", buttonsPanel, false);
-		captB = addButton("Record", buttonsPanel, true);
-		pausB = addButton("Pause", buttonsPanel, false);
-		saveB = addButton("Save ", buttonsPanel, false);
+		playB = addButton("播放", buttonsPanel, false);
+		captB = addButton("录音", buttonsPanel, true);
+		pausB = addButton("暂停", buttonsPanel, false);
+		saveB = addButton("保存 ", buttonsPanel, false);
 		innerPanel.add(buttonsPanel);
 
 		// samplingPanel
