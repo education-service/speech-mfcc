@@ -572,6 +572,7 @@ public class JSoundCapture extends JPanel implements ActionListener {
 	/**
 	 * Render a WaveForm.
 	 */
+	@SuppressWarnings("unused")
 	class SamplingGraph extends JPanel implements Runnable {
 		private static final long serialVersionUID = 1L;
 
@@ -710,6 +711,7 @@ public class JSoundCapture extends JPanel implements ActionListener {
 		 *
 		 * @see java.lang.Runnable#run()
 		 */
+		@SuppressWarnings("static-access")
 		@Override
 		public void run() {
 			seconds = 0;

@@ -11,6 +11,7 @@ import edu.ustc.audio.feature.MFCC;
  * @author wanggang
  *
  */
+@SuppressWarnings("unused")
 public class FeatureExtract {
 
 	private float[][] framedSignal;

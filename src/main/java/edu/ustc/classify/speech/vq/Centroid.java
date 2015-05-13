@@ -84,10 +84,10 @@ public class Centroid extends Points implements Serializable {
 		Points tmpPoint = pts.get(0);
 		int i = -1;
 
-		Enumeration enums = pts.elements();
+		Enumeration<Points> enums = pts.elements();
 		boolean found = false;
 		while (enums.hasMoreElements() && !found) {
-			tmpPoint = (Points) enums.nextElement();
+			tmpPoint = enums.nextElement();
 			i++;
 
 			// find the identical Points in pts vector
@@ -135,10 +135,10 @@ public class Centroid extends Points implements Serializable {
 	public void update() {
 		double sum_coordinates[] = new double[dimension];
 		Points tmpPoint;
-		Enumeration enums = pts.elements();
+		Enumeration<Points> enums = pts.elements();
 
 		while (enums.hasMoreElements()) {
-			tmpPoint = (Points) enums.nextElement();
+			tmpPoint = enums.nextElement();
 
 			// calculate the sum of all coordinates
 			for (int k = 0; k < dimension; k++) {
@@ -149,7 +149,7 @@ public class Centroid extends Points implements Serializable {
 		// divide sum of coordinates by total number points to get average
 		for (int k = 0; k < dimension; k++) {
 			setCo(k, sum_coordinates[k] / total_pts);
-			pts = new Vector(0);
+			pts = new Vector<Points>(0);
 		}
 
 		// reset number of points

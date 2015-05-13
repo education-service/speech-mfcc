@@ -67,6 +67,7 @@ public class ObjectIO<T> {
 	 * @param filePath
 	 * @return the model of type T
 	 */
+	@SuppressWarnings("unchecked")
 	public T readModel(String filePath) {
 		// open file
 		try {

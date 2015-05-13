@@ -17,10 +17,12 @@ public class FFT {
 	 * number of points
 	 */
 	protected int numPoints;
+
 	/**
 	 * real part
 	 */
 	public float real[];
+
 	/**
 	 * imaginary part
 	 */
@@ -44,13 +46,13 @@ public class FFT {
 			imag[i] = 0;
 		}
 		// perform FFT using the real & imag array
-		FFT();
+		FFTRun();
 	}
 
 	/**
 	 * performs Fast Fourier Transformation<br>
 	 */
-	private void FFT() {
+	private void FFTRun() {
 		if (numPoints == 1) {
 			return;
 		}
@@ -111,4 +113,5 @@ public class FFT {
 			}
 		}
 	}
+
 }

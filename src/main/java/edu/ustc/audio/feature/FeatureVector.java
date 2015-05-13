@@ -2,6 +2,7 @@ package edu.ustc.audio.feature;
 
 import java.io.Serializable;
 
+@SuppressWarnings("unused")
 public class FeatureVector implements Serializable {
 
 	private static final long serialVersionUID = -8560345372655736399L;
@@ -10,11 +11,12 @@ public class FeatureVector implements Serializable {
 	 * 2d array of feature vector, dimension=noOfFrame*noOfFeatures
 	 */
 	private double[][] mfccFeature;
-	private double[][] featureVector;// all
+	private double[][] featureVector; // all
 	private int noOfFrames;
 	private int noOfFeatures;
 
 	public FeatureVector() {
+		//
 	}
 
 	public double[][] getMfccFeature() {

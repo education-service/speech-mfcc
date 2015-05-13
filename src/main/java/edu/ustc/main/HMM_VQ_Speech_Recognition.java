@@ -47,8 +47,8 @@ public class HMM_VQ_Speech_Recognition extends JFrame {
 	private JPanel runTrainingPanel = null;
 	private JButton getWordButton = null;
 	private JButton btnVerify = null;
-	private JComboBox wordsComboBoxVerify = null;
-	private JComboBox wordsComboBoxAddWord = null;
+	private JComboBox<String> wordsComboBoxVerify = null;
+	private JComboBox<String> wordsComboBoxAddWord = null;
 
 	private JButton getWordButton1 = null;
 
@@ -243,11 +243,11 @@ public class HMM_VQ_Speech_Recognition extends JFrame {
 	 *
 	 * @return javax.swing.JComboBox
 	 */
-	private JComboBox getWordsComboBoxVerify() {
+	private JComboBox<String> getWordsComboBoxVerify() {
 		if (wordsComboBoxVerify == null) {
 			DataBase db = new ObjectIODataBase();
 			db.setType("hmm");
-			wordsComboBoxVerify = new JComboBox();
+			wordsComboBoxVerify = new JComboBox<String>();
 			try {
 				String[] regs = db.readRegistered();
 				for (int i = 0; i < regs.length; i++) {
@@ -260,10 +260,10 @@ public class HMM_VQ_Speech_Recognition extends JFrame {
 		return wordsComboBoxVerify;
 	}
 
-	private JComboBox getWordsComboBoxAddWord() {
+	private JComboBox<String> getWordsComboBoxAddWord() {
 		if (wordsComboBoxAddWord == null) {
 			TrainingTestingWaveFiles ttwf = new TrainingTestingWaveFiles("train");
-			wordsComboBoxAddWord = new JComboBox();
+			wordsComboBoxAddWord = new JComboBox<String>();
 			try {
 				String[] regs = ttwf.readWordWavFolder();
 				for (int i = 0; i < regs.length; i++) {
@@ -402,7 +402,7 @@ public class HMM_VQ_Speech_Recognition extends JFrame {
 	 *
 	 * @return javax.swing.JButton
 	 */
-	private JButton getAddTrainSampleBtn() {
+	public JButton getAddTrainSampleBtn() {
 		if (addTrainSampleBtn == null) {
 			addTrainSampleBtn = new JButton("录音");
 			addTrainSampleBtn.setBounds(new Rectangle(223, 103, 141, 24));
