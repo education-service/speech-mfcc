@@ -1,37 +1,31 @@
-/*
-  Please feel free to use/modify this class. 
-  If you give me credit by keeping this information or
-  by sending me an email before using it or by reporting bugs , i will be happy.
-  Email : gtiwari333@gmail.com,
-  Blog : http://ganeshtiwaridotcomdotnp.blogspot.com/ 
- */
 package edu.ustc.util;
 
 import java.io.FileNotFoundException;
 import java.util.Formatter;
 
 /**
- * saves the array to file or console ...... supports various data types
- * 
- * @author Ganesh Tiwari
+ * 保存数组到文件或者控制台中，支持多种数据类型
+ *
+ * @author wanggang
+ *
  */
 public class ArrayWriter {
+
 	private static Formatter formatter;
 
 	public ArrayWriter() {
+		//
 	}
 
 	/**
 	 * saves the @param array to file : @param fileName
-	 * 
+	 *
 	 * @param array
 	 *            input array
 	 * @param fileName
 	 *            output file
 	 */
-	public static void printIntArrayToFile(int[] array, String fileName) {// ( T
-																			// []
-																			// array...
+	public static void printIntArrayToFile(int[] array, String fileName) {
 		// get formatter object with @param fileName
 		try {
 			formatter = new Formatter(fileName);
@@ -50,7 +44,7 @@ public class ArrayWriter {
 
 	/**
 	 * display @param array 's content to console
-	 * 
+	 *
 	 * @param array
 	 *            input array
 	 */
@@ -62,7 +56,7 @@ public class ArrayWriter {
 
 	/**
 	 * saves the @param array to file : @param fileName
-	 * 
+	 *
 	 * @param array
 	 *            input array
 	 * @param fileName
@@ -87,7 +81,7 @@ public class ArrayWriter {
 
 	/**
 	 * saves the @param array to file : @param fileName
-	 * 
+	 *
 	 * @param array
 	 *            input array
 	 * @param fileName
@@ -115,7 +109,7 @@ public class ArrayWriter {
 
 	/**
 	 * display @param array 's content to console
-	 * 
+	 *
 	 * @param array
 	 *            input array
 	 */
@@ -127,7 +121,7 @@ public class ArrayWriter {
 
 	/**
 	 * display @param array 's content to console
-	 * 
+	 *
 	 * @param array
 	 *            input array
 	 */
@@ -143,7 +137,7 @@ public class ArrayWriter {
 
 	/**
 	 * display @param array 's content to console
-	 * 
+	 *
 	 * @param array
 	 *            input array
 	 */
@@ -159,7 +153,7 @@ public class ArrayWriter {
 
 	/**
 	 * display @param array 's content to console
-	 * 
+	 *
 	 * @param array
 	 *            input array
 	 */
@@ -175,7 +169,7 @@ public class ArrayWriter {
 
 	/**
 	 * saves the @param array to file : @param fileName
-	 * 
+	 *
 	 * @param array
 	 *            input array
 	 * @param fileName
@@ -200,7 +194,7 @@ public class ArrayWriter {
 
 	/**
 	 * display @param array 's content to console
-	 * 
+	 *
 	 * @param array
 	 *            input array
 	 */
@@ -212,7 +206,7 @@ public class ArrayWriter {
 
 	/**
 	 * saves the @param array to file : @param fileName
-	 * 
+	 *
 	 * @param array
 	 *            input array
 	 * @param fileName
@@ -237,7 +231,7 @@ public class ArrayWriter {
 
 	/**
 	 * display @param array 's content to console
-	 * 
+	 *
 	 * @param array
 	 *            input array
 	 */
@@ -246,4 +240,5 @@ public class ArrayWriter {
 			System.out.println(array[i]);
 		}
 	}
+
 }

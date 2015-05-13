@@ -1,10 +1,3 @@
-/*
-  Please feel free to use/modify this class. 
-  If you give me credit by keeping this information or
-  by sending me an email before using it or by reporting bugs , i will be happy.
-  Email : gtiwari333@gmail.com,
-  Blog : http://ganeshtiwaridotcomdotnp.blogspot.com/ 
- */
 package edu.ustc.db;
 
 import java.io.FileInputStream;
@@ -15,11 +8,10 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 /**
- * This Class works for both any object <code><T></code>, which implements the
- * Model interface
- * 
- * @author Ganesh Tiwari
- * 
+ * 该类服务于任何实现Model接口的对象<code><T></code>
+ *
+ * @author wanggang
+ *
  * @param <T>
  */
 public class ObjectIO<T> {
@@ -32,11 +24,12 @@ public class ObjectIO<T> {
 	 * default constructor of modelDB
 	 */
 	public ObjectIO() {
+		//
 	}
 
 	/**
 	 * sets the model to save to db
-	 * 
+	 *
 	 * @param model
 	 *            model of current type to save into db
 	 */
@@ -46,7 +39,7 @@ public class ObjectIO<T> {
 
 	/**
 	 * saves the model to {@code filePath} of type T
-	 * 
+	 *
 	 * @param filePath
 	 */
 	public void saveModel(String filePath) {
@@ -70,7 +63,7 @@ public class ObjectIO<T> {
 
 	/**
 	 * read the model from {@code filePath} of type T
-	 * 
+	 *
 	 * @param filePath
 	 * @return the model of type T
 	 */

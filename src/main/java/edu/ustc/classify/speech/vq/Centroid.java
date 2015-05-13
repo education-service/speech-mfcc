@@ -1,72 +1,33 @@
-/*
-OC Volume - Java Speech Recognition Engine
-Copyright (c) 2002-2004, OrangeCow organization
-All rights reserved.
-
-Redistribution and use in source and binary forms,
-with or without modification, are permitted provided
-that the following conditions are met:
-
- * Redistributions of source code must retain the
-  above copyright notice, this list of conditions
-  and the following disclaimer.
- * Redistributions in binary form must reproduce the
-  above copyright notice, this list of conditions
-  and the following disclaimer in the documentation
-  and/or other materials provided with the
-  distribution.
- * Neither the name of the OrangeCow organization
-  nor the names of its contributors may be used to
-  endorse or promote products derived from this
-  software without specific prior written
-  permission.
-
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS
-AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED
-WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
-FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
-EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
-LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
-(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
-SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
-OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
-CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
-THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-POSSIBILITY OF SUCH DAMAGE.
-
-Contact information:
-Please visit http://ocvolume.sourceforge.net.
- */
-
 package edu.ustc.classify.speech.vq;
 
 import java.io.Serializable;
-import java.util.Vector;
 import java.util.Enumeration;
+import java.util.Vector;
 
 /**
- * last updated on June 15, 2002<br>
- * <b>description:</b> Centroid of a codebook <b>calls:</b> Points<br>
- * <b>called by:</b> codebook<br>
- * <b>input:</b> k-dimensional points<br>
- * <b>output:</b> distortion measure
- * 
- * @author Danny Su
- * @author Andrei Leonov
+ * <b>简述:</b> Centroid of a codebook
+ * <b>调用的类:</b> Points<br>
+ * <b>调用的地方:</b> codebook<br>
+ * <b>输入:</b> k维点<br>
+ * <b>输出:</b> 失真度
+ *
+ * @author wanggang
+ *
  */
 public class Centroid extends Points implements Serializable {
+
+	private static final long serialVersionUID = -3338773995177928063L;
+
 	/**
 	 * distortion measure - sum of all points' distances from the Centroid
 	 */
 	protected double distortion = 0;
+
 	/**
 	 * stores the points that belong to this Centroid or cell
 	 */
 	protected Vector<Points> pts = new Vector<Points>(0);
+
 	/**
 	 * total number of points that belong to this Centroid or cell
 	 */
@@ -76,7 +37,7 @@ public class Centroid extends Points implements Serializable {
 	 * constructor to create a Centroid from input coordinates<br>
 	 * calls: none<br>
 	 * called by: codebook
-	 * 
+	 *
 	 * @param Co
 	 *            coordinates array
 	 */
@@ -89,7 +50,7 @@ public class Centroid extends Points implements Serializable {
 	 * get a Points at specified index<br>
 	 * calls: none<br>
 	 * called by: codebook
-	 * 
+	 *
 	 * @param index
 	 *            index number
 	 * @return the Points at the specified index
@@ -102,7 +63,7 @@ public class Centroid extends Points implements Serializable {
 	 * returns the number of points in this cell<br>
 	 * calls: none<br>
 	 * called by: codebook
-	 * 
+	 *
 	 * @return number of points
 	 */
 	public int getNumPts() {
@@ -113,7 +74,7 @@ public class Centroid extends Points implements Serializable {
 	 * removes a given Points from the Centroid's cell<br>
 	 * calls: none<br>
 	 * called by: codebook
-	 * 
+	 *
 	 * @param pt
 	 *            the Points to be removed
 	 * @param dist
@@ -142,8 +103,7 @@ public class Centroid extends Points implements Serializable {
 			distortion -= dist;
 			// update number of points
 			total_pts--;
-		}
-		else {
+		} else {
 			System.out.println("err: point not found");
 		}
 	}
@@ -152,7 +112,7 @@ public class Centroid extends Points implements Serializable {
 	 * add Points to Centroid's cell<br>
 	 * calls: none<br>
 	 * called by: codebook
-	 * 
+	 *
 	 * @param pt
 	 *            a Points belonging to the Centroid
 	 * @param dist
@@ -202,10 +162,11 @@ public class Centroid extends Points implements Serializable {
 	 * returns the distortion measure of the current cell<br>
 	 * calls: none<br>
 	 * called by: codebook
-	 * 
+	 *
 	 * @return distortion of current cell
 	 */
 	public double getDistortion() {
 		return distortion;
 	}
+
 }

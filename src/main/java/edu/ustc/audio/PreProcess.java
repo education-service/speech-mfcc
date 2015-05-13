@@ -1,19 +1,12 @@
-/*
-  Please feel free to use/modify this class. 
-  If you give me credit by keeping this information or
-  by sending me an email before using it or by reporting bugs , i will be happy.
-  Email : gtiwari333@gmail.com,
-  Blog : http://ganeshtiwaridotcomdotnp.blogspot.com/ 
- */
 package edu.ustc.audio;
 
 import edu.ustc.audio.preProcessings.EndPointDetection;
 
 /**
- * pre-processing steps
- * 
- * @author Ganesh Tiwari
- * 
+ * 预处理过程
+ *
+ * @author wanggang
+ *
  */
 public class PreProcess {
 
@@ -29,7 +22,7 @@ public class PreProcess {
 
 	/**
 	 * constructor, all steps are called frm here
-	 * 
+	 *
 	 * @param audioData
 	 *            extracted PCM data
 	 * @param samplePerFrame
@@ -69,8 +62,8 @@ public class PreProcess {
 		// calculate no of frames, for framing
 
 		noOfFrames = 2 * afterEndPtDetection.length / samplePerFrame - 1;
-		System.out.println("noOfFrames       " + noOfFrames + "  samplePerFrame     " + samplePerFrame + "  EPD length   "
-				+ afterEndPtDetection.length);
+		System.out.println("noOfFrames       " + noOfFrames + "  samplePerFrame     " + samplePerFrame
+				+ "  EPD length   " + afterEndPtDetection.length);
 		framedSignal = new float[noOfFrames][samplePerFrame];
 		for (int i = 0; i < noOfFrames; i++) {
 			int startIndex = (i * samplePerFrame / 2);

@@ -1,10 +1,3 @@
-/*
-  Please feel free to use/modify this class. 
-  If you give me credit by keeping this information or
-  by sending me an email before using it or by reporting bugs , i will be happy.
-  Email : gtiwari333@gmail.com,
-  Blog : http://ganeshtiwaridotcomdotnp.blogspot.com/ 
- */
 package edu.ustc.audio;
 
 import edu.ustc.audio.feature.Delta;
@@ -13,15 +6,17 @@ import edu.ustc.audio.feature.FeatureVector;
 import edu.ustc.audio.feature.MFCC;
 
 /**
- * Feature extraction, cepstral mean substraction, and merging with deltas
- * 
- * @author Ganesh Tiwari
- * 
+ * 特征提取
+ *
+ * @author wanggang
+ *
  */
 public class FeatureExtract {
+
 	private float[][] framedSignal;
 	private int samplePerFrame;
 	private int noOfFrames;
+
 	/**
 	 * how many mfcc coefficients per frame
 	 */
@@ -42,7 +37,7 @@ public class FeatureExtract {
 	// FeatureVector fv;
 	/**
 	 * constructor of feature extract
-	 * 
+	 *
 	 * @param framedSignal
 	 *            2-D audio signal obtained after framing
 	 * @param samplePerFrame

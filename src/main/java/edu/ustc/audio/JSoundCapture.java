@@ -1,10 +1,3 @@
-/*
-  Please feel free to use/modify this class. 
-  If you give me credit by keeping this information or
-  by sending me an email before using it or by reporting bugs , i will be happy.
-  Email : gtiwari333@gmail.com,
-  Blog : http://ganeshtiwaridotcomdotnp.blogspot.com/ 
- */
 package edu.ustc.audio;
 
 import java.awt.BasicStroke;
@@ -53,13 +46,8 @@ import edu.ustc.util.MessageType;
  * Capture/Playback sample. Record audio in different formats and then playback
  * the recorded audio. The captured audio can be saved either as a WAVE, AU or
  * AIFF. Or load an audio file for streaming playback.
- * 
- * @version @(#)Manual.java 1.11 99/12/03
- * @version 2.1
- * @author Brian Lichtenwalter-- visualization and capture
- * @modified-by Ganesh --> made a reusable class
+ *
  */
-
 public class JSoundCapture extends JPanel implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
@@ -86,7 +74,7 @@ public class JSoundCapture extends JPanel implements ActionListener {
 
 	/**
 	 * Instantiates a new j sound capture.
-	 * 
+	 *
 	 * @param isDrawingRequired
 	 *            the is drawing required
 	 * @param isSaveRequired
@@ -131,7 +119,8 @@ public class JSoundCapture extends JPanel implements ActionListener {
 	//
 	// }
 	public boolean isSoundDataAvailable() {
-		if (audioBytes != null) return (audioBytes.length > 100);
+		if (audioBytes != null)
+			return (audioBytes.length > 100);
 		else
 			return false;
 	}
@@ -172,38 +161,33 @@ public class JSoundCapture extends JPanel implements ActionListener {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 	 */
+	@Override
 	public void actionPerformed(ActionEvent e) {
 		System.out.println("actionPerformed *********");
 		Object obj = e.getSource();
 		if (isSaveRequired && obj.equals(saveB)) {
 
 			getFileNameAndSaveFile();
-		}
-		else if (obj.equals(playB)) {
+		} else if (obj.equals(playB)) {
 			if (playB.getText().startsWith("Play")) {
 				playCaptured();
-			}
-			else {
+			} else {
 				stopPlaying();
 			}
-		}
-		else if (obj.equals(captB)) {
+		} else if (obj.equals(captB)) {
 			if (captB.getText().startsWith("Record")) {
 				startRecord();
-			}
-			else {
+			} else {
 				stopRecording();
 			}
-		}
-		else if (obj.equals(pausB)) {
+		} else if (obj.equals(pausB)) {
 			if (pausB.getText().startsWith("Pause")) {
 				pausePlaying();
-			}
-			else {
+			} else {
 				resumePlaying();
 			}
 		}
@@ -211,7 +195,8 @@ public class JSoundCapture extends JPanel implements ActionListener {
 
 	public void playCaptured() {
 		playback.start();
-		if (isDrawingRequired) samplingGraph.start();
+		if (isDrawingRequired)
+			samplingGraph.start();
 		captB.setEnabled(false);
 		pausB.setEnabled(true);
 		playB.setText("Stop");
@@ -219,7 +204,8 @@ public class JSoundCapture extends JPanel implements ActionListener {
 
 	public void stopPlaying() {
 		playback.stop();
-		if (isDrawingRequired) samplingGraph.stop();
+		if (isDrawingRequired)
+			samplingGraph.stop();
 		captB.setEnabled(true);
 		pausB.setEnabled(false);
 		playB.setText("Play");
@@ -228,7 +214,8 @@ public class JSoundCapture extends JPanel implements ActionListener {
 	public void startRecord() {
 		file = null;
 		capture.start();
-		if (isDrawingRequired) samplingGraph.start();
+		if (isDrawingRequired)
+			samplingGraph.start();
 		playB.setEnabled(false);
 		pausB.setEnabled(true);
 		saveB.setEnabled(false);
@@ -238,7 +225,8 @@ public class JSoundCapture extends JPanel implements ActionListener {
 	public void stopRecording() {
 		lines.removeAllElements();
 		capture.stop();
-		if (isDrawingRequired) samplingGraph.stop();
+		if (isDrawingRequired)
+			samplingGraph.stop();
 		playB.setEnabled(true);
 		pausB.setEnabled(false);
 		saveB.setEnabled(true);
@@ -249,8 +237,7 @@ public class JSoundCapture extends JPanel implements ActionListener {
 
 		if (capture.thread != null) {
 			capture.line.stop();
-		}
-		else {
+		} else {
 			if (playback.thread != null) {
 				playback.line.stop();
 			}
@@ -262,8 +249,7 @@ public class JSoundCapture extends JPanel implements ActionListener {
 	public void resumePlaying() {
 		if (capture.thread != null) {
 			capture.line.start();
-		}
-		else {
+		} else {
 			if (playback.thread != null) {
 				playback.line.start();
 			}
@@ -286,7 +272,7 @@ public class JSoundCapture extends JPanel implements ActionListener {
 
 	/**
 	 * Creates the audio input stream.
-	 * 
+	 *
 	 * @param file
 	 *            the file
 	 * @param updateComponents
@@ -300,33 +286,35 @@ public class JSoundCapture extends JPanel implements ActionListener {
 				audioInputStream = AudioSystem.getAudioInputStream(file);
 				playB.setEnabled(true);
 				// fileName = file.getName();
-				long milliseconds = (long) ((audioInputStream.getFrameLength() * 1000) / audioInputStream.getFormat().getFrameRate());
+				long milliseconds = (long) ((audioInputStream.getFrameLength() * 1000) / audioInputStream.getFormat()
+						.getFrameRate());
 				duration = milliseconds / 1000.0;
 
 				saveB.setEnabled(true);
 				if (updateComponents) {
 					formatControls.setFormat(audioInputStream.getFormat());
-					if (isDrawingRequired) samplingGraph.createWaveForm(null);
+					if (isDrawingRequired)
+						samplingGraph.createWaveForm(null);
 				}
 			} catch (Exception ex) {
 				reportStatus(ex.toString(), MessageType.ERROR);
 			}
-		}
-		else {
+		} else {
 			reportStatus("Audio file required.", MessageType.INFO);
 		}
 	}
 
 	/**
 	 * Report status.
-	 * 
+	 *
 	 * @param msg
 	 *            the msg
 	 */
 	private void reportStatus(String msg, MessageType type) {
 		if ((errStr = msg) != null) {
 			System.out.println(errStr);
-			if (isDrawingRequired) samplingGraph.repaint();
+			if (isDrawingRequired)
+				samplingGraph.repaint();
 		}
 	}
 
@@ -352,11 +340,13 @@ public class JSoundCapture extends JPanel implements ActionListener {
 		private void shutDown(String message) {
 			if ((errStr = message) != null) {
 				System.err.println(errStr);
-				if (isDrawingRequired) samplingGraph.repaint();
+				if (isDrawingRequired)
+					samplingGraph.repaint();
 			}
 			if (thread != null) {
 				thread = null;
-				if (isDrawingRequired) samplingGraph.stop();
+				if (isDrawingRequired)
+					samplingGraph.stop();
 				captB.setEnabled(true);
 				pausB.setEnabled(false);
 				playB.setText("Play");
@@ -365,9 +355,10 @@ public class JSoundCapture extends JPanel implements ActionListener {
 
 		/*
 		 * (non-Javadoc)
-		 * 
+		 *
 		 * @see java.lang.Runnable#run()
 		 */
+		@Override
 		public void run() {
 
 			// reload the file if loaded by file
@@ -475,21 +466,24 @@ public class JSoundCapture extends JPanel implements ActionListener {
 		private void shutDown(String message) {
 			if ((errStr = message) != null && thread != null) {
 				thread = null;
-				if (isDrawingRequired) samplingGraph.stop();
+				if (isDrawingRequired)
+					samplingGraph.stop();
 
 				playB.setEnabled(true);
 				pausB.setEnabled(false);
 				saveB.setEnabled(true);
 				captB.setText("Record");
-				if (isDrawingRequired) samplingGraph.repaint();
+				if (isDrawingRequired)
+					samplingGraph.repaint();
 			}
 		}
 
 		/*
 		 * (non-Javadoc)
-		 * 
+		 *
 		 * @see java.lang.Runnable#run()
 		 */
+		@Override
 		public void run() {
 
 			duration = 0;
@@ -594,7 +588,7 @@ public class JSoundCapture extends JPanel implements ActionListener {
 
 		/**
 		 * Creates the wave form.
-		 * 
+		 *
 		 * @param audioBytes
 		 *            the audio bytes
 		 */
@@ -618,11 +612,10 @@ public class JSoundCapture extends JPanel implements ActionListener {
 				int idx = (int) (frames_per_pixel * numChannels * x);
 				if (wd.getFormat().getSampleSizeInBits() == 8) {
 					my_byte = (byte) audioData[idx];
-				}
-				else {
+				} else {
 					my_byte = (byte) (128 * audioData[idx] / 32768);
 				}
-				double y_new = (double) (h * (128 - my_byte) / 256);
+				double y_new = h * (128 - my_byte) / 256;
 				lines.add(new Line2D.Double(x, y_last, x, y_new));
 				y_last = y_new;
 			}
@@ -632,9 +625,10 @@ public class JSoundCapture extends JPanel implements ActionListener {
 
 		/*
 		 * (non-Javadoc)
-		 * 
+		 *
 		 * @see javax.swing.JComponent#paint(java.awt.Graphics)
 		 */
+		@Override
 		public void paint(Graphics g) {
 
 			Dimension d = getSize();
@@ -667,24 +661,23 @@ public class JSoundCapture extends JPanel implements ActionListener {
 					tl.draw(g2, x, y += tl.getAscent());
 					y += tl.getDescent() + tl.getLeading();
 				}
-			}
-			else if (capture.thread != null) {
+			} else if (capture.thread != null) {
 				// paint during capture
 				g2.setColor(Color.black);
 				g2.setFont(font12);
 				g2.drawString("Length: " + String.valueOf(seconds), 3, h - 4);
-			}
-			else {
+			} else {
 				// paint during playback
 				g2.setColor(Color.black);
 				g2.setFont(font12);
-				g2.drawString("Length: " + String.valueOf(duration) + "    Position: " + String.valueOf(seconds), 3, h - 4);
+				g2.drawString("Length: " + String.valueOf(duration) + "    Position: " + String.valueOf(seconds), 3,
+						h - 4);
 
 				if (audioInputStream != null) {
 					// .. render sampling graph ..
 					g2.setColor(jfcBlue);
 					for (int i = 1; i < lines.size(); i++) {
-						g2.draw((Line2D) lines.get(i));
+						g2.draw(lines.get(i));
 					}
 
 					// .. draw current position ..
@@ -714,20 +707,20 @@ public class JSoundCapture extends JPanel implements ActionListener {
 
 		/*
 		 * (non-Javadoc)
-		 * 
+		 *
 		 * @see java.lang.Runnable#run()
 		 */
+		@Override
 		public void run() {
 			seconds = 0;
 			while (thread != null) {
 				if ((playback.line != null) && (playback.line.isOpen())) {
 
-					long milliseconds = (long) (playback.line.getMicrosecondPosition() / 1000);
+					long milliseconds = playback.line.getMicrosecondPosition() / 1000;
 					seconds = milliseconds / 1000.0;
-				}
-				else if ((capture.line != null) && (capture.line.isActive())) {
+				} else if ((capture.line != null) && (capture.line.isActive())) {
 
-					long milliseconds = (long) (capture.line.getMicrosecondPosition() / 1000);
+					long milliseconds = capture.line.getMicrosecondPosition() / 1000;
 					seconds = milliseconds / 1000.0;
 				}
 
@@ -739,7 +732,8 @@ public class JSoundCapture extends JPanel implements ActionListener {
 
 				repaint();
 
-				while ((capture.line != null && !capture.line.isActive()) || (playback.line != null && !playback.line.isOpen())) {
+				while ((capture.line != null && !capture.line.isActive())
+						|| (playback.line != null && !playback.line.isOpen())) {
 					try {
 						thread.sleep(10);
 					} catch (Exception e) {

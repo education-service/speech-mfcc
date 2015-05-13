@@ -1,68 +1,25 @@
-/*
-OC Volume - Java Speech Recognition Engine
-Copyright (c) 2002-2004, OrangeCow organization
-All rights reserved.
-
-Redistribution and use in source and binary forms,
-with or without modification, are permitted provided
-that the following conditions are met:
-
- * Redistributions of source code must retain the
-  above copyright notice, this list of conditions
-  and the following disclaimer.
- * Redistributions in binary form must reproduce the
-  above copyright notice, this list of conditions
-  and the following disclaimer in the documentation
-  and/or other materials provided with the
-  distribution.
- * Neither the name of the OrangeCow organization
-  nor the names of its contributors may be used to
-  endorse or promote products derived from this
-  software without specific prior written
-  permission.
-
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS
-AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED
-WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
-FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
-EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
-LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
-(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
-SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
-OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
-CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
-THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-POSSIBILITY OF SUCH DAMAGE.
-
-Contact information:
-Please visit http://ocvolume.sourceforge.net.
- */
-
 package edu.ustc.classify.speech.vq;
 
 import java.io.Serializable;
 
 /**
- * last updated on June 15, 2002<br>
- * <b>description:</b> Points class which stores coordinates in k-dimensional
- * space<br>
- * <b>calls:</b> none<br>
- * <b>called by:</b> centroid, codebook<br>
- * <b>input:</b> set of co-ordinates<br>
- * <b>output:</b> none
- * 
- * @author Danny Su
- * @author Andrei Leonov
+ * <b>简述:</b> 该类用于存储k维空间中的坐标数据<br>
+ * <b>使用的地方:</b> centroid, codebook<br>
+ * <b>输入:</b> 坐标集合<br>
+ * <b>输出:</b> 无
+ *
+ * @author wanggang
+ *
  */
 public class Points implements Serializable {
+
+	private static final long serialVersionUID = -3815055105806618573L;
+
 	/**
 	 * k-dimensional coordinates array
 	 */
 	protected double coordinates[];
+
 	/**
 	 * k-dimensions
 	 */
@@ -72,7 +29,7 @@ public class Points implements Serializable {
 	 * constructor to create a Points with k-dimensional coordinates array<br>
 	 * calls: none<br>
 	 * called by: centroid, codebook
-	 * 
+	 *
 	 * @param co
 	 *            k-dimensional coordinates array
 	 */
@@ -85,7 +42,7 @@ public class Points implements Serializable {
 	 * get all the coordinates<br>
 	 * calls: none<br>
 	 * called by: codebook
-	 * 
+	 *
 	 * @return coordinates as a double array
 	 */
 	public double[] getAllCo() {
@@ -96,7 +53,7 @@ public class Points implements Serializable {
 	 * get coordinate at specific index<br>
 	 * calls: none<br>
 	 * called by: centroid, codebook
-	 * 
+	 *
 	 * @param i
 	 *            index number
 	 * @return coordinate at index i
@@ -109,7 +66,7 @@ public class Points implements Serializable {
 	 * set coordinate at specific index<br>
 	 * calls: none<br>
 	 * called by: centroid, codebook
-	 * 
+	 *
 	 * @param i
 	 *            index number
 	 * @param value
@@ -123,7 +80,7 @@ public class Points implements Serializable {
 	 * replace coordinates with new ones<br>
 	 * calls: none<br>
 	 * called by: centroid, codebook
-	 * 
+	 *
 	 * @param tCo
 	 *            new coordinates array
 	 */
@@ -135,7 +92,7 @@ public class Points implements Serializable {
 	 * get the k-dimensional space that the Points is in<br>
 	 * calls: none<br>
 	 * called by: centroid, codebook
-	 * 
+	 *
 	 * @return dimension
 	 */
 	public int getDimension() {
@@ -146,7 +103,7 @@ public class Points implements Serializable {
 	 * check whether two points are identical<br>
 	 * calls: none<br>
 	 * called by: centroid, codebook
-	 * 
+	 *
 	 * @param p1
 	 *            first Points
 	 * @param p2
@@ -167,11 +124,11 @@ public class Points implements Serializable {
 					equal = false;
 				}
 			}
-		}
-		else {
+		} else {
 			equal = false;
 		}
 
 		return equal;
 	}
+
 }

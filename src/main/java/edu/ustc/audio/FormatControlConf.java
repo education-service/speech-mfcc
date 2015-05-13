@@ -1,10 +1,3 @@
-/*
-  Please feel free to use/modify this class. 
-  If you give me credit by keeping this information or
-  by sending me an email before using it or by reporting bugs , i will be happy.
-  Email : gtiwari333@gmail.com,
-  Blog : http://ganeshtiwaridotcomdotnp.blogspot.com/ 
- */
 package edu.ustc.audio;
 
 import javax.sound.sampled.AudioFormat;
@@ -20,7 +13,7 @@ public class FormatControlConf {
 
 	public FormatControlConf() {
 		encoding = AudioFormat.Encoding.PCM_SIGNED;
-		rate = (float) SAMPLING_RATE;
+		rate = SAMPLING_RATE;
 		sampleSize = 16;
 		bigEndian = false;
 		channels = 1; // mono channel

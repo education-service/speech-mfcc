@@ -1,10 +1,3 @@
-/*
-  Please feel free to use/modify this class. 
-  If you give me credit by keeping this information or
-  by sending me an email before using it or by reporting bugs , i will be happy.
-  Email : gtiwari333@gmail.com,
-  Blog : http://ganeshtiwaridotcomdotnp.blogspot.com/ 
- */
 package edu.ustc.audio;
 
 import java.io.ByteArrayInputStream;
@@ -20,9 +13,10 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 /**
- * saving and extracting PCM data from wavefile byteArray
- * 
- * @author Ganesh Tiwari
+ * 从音频文件字节数组中提取PCM数据并保存
+ *
+ * @author wanggang
+ *
  */
 public class WaveData {
 
@@ -36,6 +30,7 @@ public class WaveData {
 	private double durationSec;
 
 	public WaveData() {
+		//
 	}
 
 	public byte[] getAudioBytes() {
@@ -54,21 +49,20 @@ public class WaveData {
 		return format;
 	}
 
-	public float[] extractAmplitudeFromFile(File wavFile) {
-		try {
-			// create file input stream
-			FileInputStream fis = new FileInputStream(wavFile);
-			// create bytearray from file
-			arrFile = new byte[(int) wavFile.length()];
+	public float[] extractAmplitudeFromFile(File waveFile) {
+		// 创建文件输入流
+		try (FileInputStream fis = new FileInputStream(waveFile);) {
+			// 从文件中创建字节数组
+			arrFile = new byte[(int) waveFile.length()];
 			fis.read(arrFile);
 		} catch (Exception e) {
-			System.out.println("SomeException : " + e.toString());
+			System.err.println("SomeException : " + e.toString());
 		}
 		return extractAmplitudeFromFileByteArray(arrFile);
 	}
 
 	public float[] extractAmplitudeFromFileByteArray(byte[] arrFile) {
-		// System.out.println("File :  "+wavFile+""+arrFile.length);
+		//		System.out.println("File :  " + wavFile + "" + arrFile.length);
 		bis = new ByteArrayInputStream(arrFile);
 		return extractAmplitudeFromFileByteArrayInputStream(bis);
 	}
@@ -76,8 +70,8 @@ public class WaveData {
 	/**
 	 * for extracting amplitude array the format we are using :16bit, 22khz, 1
 	 * channel, littleEndian,
-	 * 
-	 * @return PCM audioData
+	 *
+	 * @return PCM音频数据
 	 * @throws Exception
 	 */
 	public float[] extractAmplitudeFromFileByteArrayInputStream(ByteArrayInputStream bis) {
@@ -90,7 +84,8 @@ public class WaveData {
 			System.out.println("IOException during extracting amplitude");
 			e.printStackTrace();
 		}
-		float milliseconds = (long) ((audioInputStream.getFrameLength() * 1000) / audioInputStream.getFormat().getFrameRate());
+		float milliseconds = (long) ((audioInputStream.getFrameLength() * 1000) / audioInputStream.getFormat()
+				.getFrameRate());
 		durationSec = milliseconds / 1000.0;
 		return extractFloatDataFromAudioInputStream(audioInputStream);
 	}
@@ -99,7 +94,8 @@ public class WaveData {
 		format = audioInputStream.getFormat();
 		audioBytes = new byte[(int) (audioInputStream.getFrameLength() * format.getFrameSize())];
 		// calculate durationSec
-		float milliseconds = (long) ((audioInputStream.getFrameLength() * 1000) / audioInputStream.getFormat().getFrameRate());
+		float milliseconds = (long) ((audioInputStream.getFrameLength() * 1000) / audioInputStream.getFormat()
+				.getFrameRate());
 		durationSec = milliseconds / 1000.0;
 		// System.out.println("The current signal has duration "+durationSec+" Sec");
 		try {
@@ -125,8 +121,7 @@ public class WaveData {
 					int LSB = audioBytes[2 * i + 1];
 					audioData[i] = MSB << 8 | (255 & LSB);
 				}
-			}
-			else {
+			} else {
 				for (int i = 0; i < nlengthInSamples; i++) {
 					/* First byte is LSB (low order) */
 					int LSB = audioBytes[2 * i];
@@ -135,16 +130,14 @@ public class WaveData {
 					audioData[i] = MSB << 8 | (255 & LSB);
 				}
 			}
-		}
-		else if (format.getSampleSizeInBits() == 8) {
+		} else if (format.getSampleSizeInBits() == 8) {
 			int nlengthInSamples = audioBytes.length;
 			audioData = new float[nlengthInSamples];
 			if (format.getEncoding().toString().startsWith("PCM_SIGN")) {
 				for (int i = 0; i < audioBytes.length; i++) {
 					audioData[i] = audioBytes[i];
 				}
-			}
-			else {
+			} else {
 				for (int i = 0; i < audioBytes.length; i++) {
 					audioData[i] = audioBytes[i] - 128;
 				}
@@ -157,7 +150,7 @@ public class WaveData {
 
 	/**
 	 * Save to file.
-	 * 
+	 *
 	 * @param name
 	 *            the name
 	 * @param fileType
@@ -165,9 +158,12 @@ public class WaveData {
 	 */
 	public void saveToFile(String name, AudioFileFormat.Type fileType, AudioInputStream audioInputStream) {
 		File myFile = new File(name);
-		if (!myFile.exists()) myFile.mkdir();
+		if (!myFile.exists())
+			myFile.mkdir();
 
-		if (audioInputStream == null) { return; }
+		if (audioInputStream == null) {
+			return;
+		}
 		// reset to the beginnning of the captured data
 		try {
 			audioInputStream.reset();
@@ -192,7 +188,7 @@ public class WaveData {
 
 	/**
 	 * saving the file's bytearray
-	 * 
+	 *
 	 * @param fileName
 	 *            the name of file to save the received byteArray of File
 	 */

@@ -1,17 +1,5 @@
-/*
-  Please feel free to use/modify this class. 
-  If you give me credit by keeping this information or
-  by sending me an email before using it or by reporting bugs , i will be happy.
-  Email : gtiwari333@gmail.com,
-  Blog : http://ganeshtiwaridotcomdotnp.blogspot.com/ 
- */
 package edu.ustc.audio.feature;
 
-/**
- * 
- * @author Ganesh Tiwari
- * 
- */
 public class MFCC {
 
 	private int numMelFilters = 30;// how much
@@ -22,7 +10,7 @@ public class MFCC {
 	private double upperFilterFreq;
 	private double bin[];
 	private int samplePerFrame;
-	// /////
+
 	FFT fft;
 	DCT dct;
 
@@ -57,7 +45,7 @@ public class MFCC {
 		double f[] = nonLinearTransformation(fbank);
 		// System.out.println("after N L T");
 		// ArrayWriter.printDoubleArrayToConole(f);
-		
+
 		// Cepstral coefficients, by DCT
 		double cepc[] = dct.performDCT(f);
 		// System.out.println("after DCT");
@@ -79,7 +67,7 @@ public class MFCC {
 
 	/**
 	 * emphasize high freq signal
-	 * 
+	 *
 	 * @param inputSignal
 	 * @return
 	 */
@@ -106,7 +94,7 @@ public class MFCC {
 
 	/**
 	 * performs mel filter operation
-	 * 
+	 *
 	 * @param bin
 	 *            magnitude spectrum (| |)^2 of fft
 	 * @param cbin
@@ -139,7 +127,7 @@ public class MFCC {
 
 	/**
 	 * performs nonlinear transformation
-	 * 
+	 *
 	 * @param fbank
 	 * @return f log of filter bac
 	 */

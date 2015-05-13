@@ -1,47 +1,3 @@
-/*
-OC Volume - Java Speech Recognition Engine
-Copyright (c) 2002-2004, OrangeCow organization
-All rights reserved.
-
-Redistribution and use in source and binary forms,
-with or without modification, are permitted provided
-that the following conditions are met:
-
- * Redistributions of source code must retain the
-  above copyright notice, this list of conditions
-  and the following disclaimer.
- * Redistributions in binary form must reproduce the
-  above copyright notice, this list of conditions
-  and the following disclaimer in the documentation
-  and/or other materials provided with the
-  distribution.
- * Neither the name of the OrangeCow organization
-  nor the names of its contributors may be used to
-  endorse or promote products derived from this
-  software without specific prior written
-  permission.
-
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS
-AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED
-WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
-FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
-EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
-LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
-(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
-SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
-OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
-CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
-THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-POSSIBILITY OF SUCH DAMAGE.
-
-Contact information:
-Please visit http://ocvolume.sourceforge.net.
- */
-
 package edu.ustc.classify.speech.vq;
 
 import edu.ustc.classify.speech.CodeBookDictionary;
@@ -49,40 +5,43 @@ import edu.ustc.db.DataBase;
 import edu.ustc.db.ObjectIODataBase;
 
 /**
- * last updated on June 15, 2002<br>
- * <b>description:</b> Codebook for Vector Quantization component<br>
- * <b>calls:</b> Centroid, Points<br>
- * <b>called by:</b> volume, train<br>
- * <b>input:</b> speech signal<br>
- * <b>output:</b> set of centroids, set of indices
- * 
- * @author Danny Su
- * @author Andrei Leonov
- * 
- * @modified-by Ganesh Tiwari : DB Operations last updated on Dec-27,2010
+ * <b>简述:</b> 矢量量化组件的Codebook<br>
+ * <b>调用的类:</b> Centroid, Points<br>
+ * <b>调用的地方:</b> volume, train<br>
+ * <b>输入:</b> 语音信号 <br>
+ * <b>输出:</b> centroids集合, indices集合
+ *
+ * @author wanggang
+ *
  */
 public class Codebook {
+
 	/**
 	 * split factor (should be in the range of 0.01 <= SPLIT <= 0.05)
 	 */
 	protected final double SPLIT = 0.01;
+
 	/**
 	 * minimum distortion
 	 */
 	protected final double MIN_DISTORTION = 0.1;
+
 	/**
 	 * Codebook size - number of codewords (codevectors)<br>
 	 * default is: 256
 	 */
 	protected int codebook_size = 256;
+
 	/**
 	 * centroids array
 	 */
 	protected Centroid centroids[];
+
 	/**
 	 * training points
 	 */
 	protected Points pt[];
+
 	/**
 	 * dimension /////no of features
 	 */
@@ -93,7 +52,7 @@ public class Codebook {
 	 * size<br>
 	 * calls: none<br>
 	 * called by: trainCodebook
-	 * 
+	 *
 	 * @param tmpPt
 	 *            training vectors
 	 * @param size
@@ -108,8 +67,7 @@ public class Codebook {
 		if (pt.length >= codebook_size) {
 			dimension = pt[0].getDimension();
 			initialize();
-		}
-		else {
+		} else {
 			System.out.println("err: not enough training points");
 		}
 	}
@@ -119,7 +77,7 @@ public class Codebook {
 	 * Codebook size (256)<br>
 	 * calls: none<br>
 	 * called by: trainCodebook
-	 * 
+	 *
 	 * @param tmpPt
 	 *            training vectors
 	 */
@@ -130,8 +88,7 @@ public class Codebook {
 		if (pt.length >= codebook_size) {
 			dimension = pt[0].getDimension();
 			initialize();
-		}
-		else {
+		} else {
 			System.out.println("err: not enough training points");
 		}
 	}
@@ -152,7 +109,7 @@ public class Codebook {
 		// showParameters();
 	}
 
-	private void showParameters() {
+	public void showParameters() {
 		for (int c = 0; c < centroids.length; c++) {
 			// bw.write("c" + c + ": (");
 			for (int k = 0; k < dimension; k++) {
@@ -235,7 +192,6 @@ public class Codebook {
 		db.saveModel(cbd, null);// filepath is not used
 		// System.out.println("Showing parameters");
 		// showParameters();
-
 	}
 
 	/**
@@ -268,7 +224,7 @@ public class Codebook {
 	 * quantize the input array of points in k-dimensional space<br>
 	 * calls: none<br>
 	 * called by: volume
-	 * 
+	 *
 	 * @param pts
 	 *            points to be quantized
 	 * @return quantized index array
@@ -285,7 +241,7 @@ public class Codebook {
 	 * calculates the distortion<br>
 	 * calls: none<br>
 	 * called by: volume
-	 * 
+	 *
 	 * @param pts
 	 *            points to calculate the distortion with
 	 * @return distortion measure
@@ -304,7 +260,7 @@ public class Codebook {
 	 * finds the closest Centroid to a specific Points<br>
 	 * calls: none<br>
 	 * called by: Codebook
-	 * 
+	 *
 	 * @param pt
 	 *            Points
 	 * @return index number of the closest Centroid
@@ -328,7 +284,7 @@ public class Codebook {
 	 * finds the closest Centroid to a specific Centroid<br>
 	 * calls: none<br>
 	 * called by: Codebook
-	 * 
+	 *
 	 * @param pt
 	 *            Points
 	 * @return index number of the closest Centroid
@@ -351,7 +307,7 @@ public class Codebook {
 	 * finds the closest Points in c2's cell to c1<br>
 	 * calls: none<br>
 	 * called by: Codebook
-	 * 
+	 *
 	 * @param c1
 	 *            first Centroid
 	 * @param c2
@@ -404,7 +360,7 @@ public class Codebook {
 	 * calculates the distance of a Points to a Centroid<br>
 	 * calls: none<br>
 	 * called by: Codebook
-	 * 
+	 *
 	 * @param tPt
 	 *            points
 	 * @param tC
@@ -420,4 +376,5 @@ public class Codebook {
 		distance = Math.sqrt(distance);
 		return distance;
 	}
+
 }

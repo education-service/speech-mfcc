@@ -1,16 +1,11 @@
-/*
-  Please feel free to use/modify this class. 
-  If you give me credit by keeping this information or
-  by sending me an email before using it or by reporting bugs , i will be happy.
-  Email : gtiwari333@gmail.com,
-  Blog : http://ganeshtiwaridotcomdotnp.blogspot.com/ 
- */
 package edu.ustc.audio.preProcessings;
 
 /**
- * @author Madhav Pandey, Ganesh Tiwari
- * @reference 'A New Silence Removal and Endpoint Detection Algorithm for Speech
- *            and Speaker Recognition Applications' by IIT, Khragpur
+ * 参考：'A New Silence Removal and Endpoint Detection Algorithm for Speech and
+ *      Speaker Recognition Applications' by IIT, Khragpur
+ *
+ * @author wanggang
+ *
  */
 public class EndPointDetection {
 
@@ -60,8 +55,7 @@ public class EndPointDetection {
 			// sd));
 			if ((Math.abs(originalSignal[i] - m) / sd) > 2) {
 				voiced[i] = 1;
-			}
-			else {
+			} else {
 				voiced[i] = 0;
 			}
 		}
@@ -82,16 +76,14 @@ public class EndPointDetection {
 			for (int j = i; j < i + samplePerFrame; j++) {
 				if (voiced[j] == 1) {
 					count_voiced++;
-				}
-				else {
+				} else {
 					count_unvoiced++;
 				}
 			}
 			if (count_voiced > count_unvoiced) {
 				usefulFramesCount++;
 				voicedFrame[frameCount++] = 1;
-			}
-			else {
+			} else {
 				voicedFrame[frameCount++] = 0;
 			}
 		}

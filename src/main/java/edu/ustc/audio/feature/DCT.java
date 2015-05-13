@@ -1,17 +1,10 @@
-/*
-  Please feel free to use/modify this class. 
-  If you give me credit by keeping this information or
-  by sending me an email before using it or by reporting bugs , i will be happy.
-  Email : gtiwari333@gmail.com,
-  Blog : http://ganeshtiwaridotcomdotnp.blogspot.com/ 
- */
 package edu.ustc.audio.feature;
 
 /**
- * performs Inverser Fourier Transform <br>
- * we used Dct because there is only real coeffs
- * 
- * @author Ganesh Tiwari
+ * 反傅立叶变换，这里使用DCT余弦变换，因为只有实系数
+ *
+ * @author wanggang
+ *
  */
 public class DCT {
 
@@ -46,4 +39,5 @@ public class DCT {
 		}
 		return cepc;
 	}
+
 }

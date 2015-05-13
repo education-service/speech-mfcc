@@ -1,21 +1,10 @@
-/*
-  Please feel free to use/modify this class. 
-  If you give me credit by keeping this information or
-  by sending me an email before using it or by reporting bugs , i will be happy.
-  Email : gtiwari333@gmail.com,
-  Blog : http://ganeshtiwaridotcomdotnp.blogspot.com/ 
- */
 package edu.ustc.audio.feature;
 
 import java.io.Serializable;
 
-/**
- * 
- * @author Ganesh Tiwari for storing all coeffs of spectral features<br>
- *         include mfcc + delta mfcc + delta delta mfcc include engergy + delta
- *         energy+ delta delta energy
- */
 public class FeatureVector implements Serializable {
+
+	private static final long serialVersionUID = -8560345372655736399L;
 
 	/**
 	 * 2d array of feature vector, dimension=noOfFrame*noOfFeatures
@@ -54,7 +43,7 @@ public class FeatureVector implements Serializable {
 
 	/**
 	 * returns feature vector
-	 * 
+	 *
 	 * @return
 	 */
 	public double[][] getFeatureVector() {
@@ -63,7 +52,7 @@ public class FeatureVector implements Serializable {
 
 	/**
 	 * sets the feature vector array
-	 * 
+	 *
 	 * @param featureVector
 	 */
 	public void setFeatureVector(double[][] featureVector) {

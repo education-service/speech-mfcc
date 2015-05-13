@@ -1,47 +1,3 @@
-/*
-OC Volume - Java Speech Recognition Engine
-Copyright (c) 2002-2004, OrangeCow organization
-All rights reserved.
-
-Redistribution and use in source and binary forms,
-with or without modification, are permitted provided
-that the following conditions are met:
-
- * Redistributions of source code must retain the
-  above copyright notice, this list of conditions
-  and the following disclaimer.
- * Redistributions in binary form must reproduce the
-  above copyright notice, this list of conditions
-  and the following disclaimer in the documentation
-  and/or other materials provided with the
-  distribution.
- * Neither the name of the OrangeCow organization
-  nor the names of its contributors may be used to
-  endorse or promote products derived from this
-  software without specific prior written
-  permission.
-
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS
-AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED
-WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
-FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
-EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
-LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
-(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
-SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
-OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
-CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
-THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-POSSIBILITY OF SUCH DAMAGE.
-
-Contact information:
-Please visit http://ocvolume.sourceforge.net.
- */
-
 package edu.ustc.classify.speech;
 
 import edu.ustc.db.DataBase;
@@ -49,86 +5,96 @@ import edu.ustc.db.ObjectIODataBase;
 import edu.ustc.util.ArrayWriter;
 
 /**
- * last updated on June 15, 2002<br>
- * <b>description:</b> this class represents a left-to-right Hidden Markov Model
- * and its essential methods for speech recognition. The collection of methods
- * include Forward-Backward Algorithm, Baum-Welch Algorithm, Scaling, Viterbi,
- * etc.<br>
- * <b>calls:</b> none<br>
- * <b>called by:</b> volume, train<br>
- * <b>input:</b> sequence of integers<br>
- * <b>output:</b> probability
- * 
- * @author Danny Su
- * 
- * @modified-by Ganesh Tiwari : DB Operations, Initialization of parameters
- *              Corrected last updated on Dec-27,2010
+ * <b>简述：</b> 该类表示一个从左到右的HMM模型和语音识别中HMM必要的方法。
+ * 这些方法有：前向后向算法，Baum-Welch算法，Scaling算法，Viterbi算法等。<br>
+ * <b>使用该类的地方:</b> volume, train<br>
+ * <b>输入:</b> 整数序列<br>
+ * <b>输出:</b> 概率
+ *
+ * @author wanggang
+ *
  */
 public class HiddenMarkov {
+
 	/**
 	 * minimum probability
 	 */
 	// final double MIN_PROBABILITY = 0.00000000001;
 	final double MIN_PROBABILITY = 0.0001;
+
 	/**
 	 * length of observation sequence
 	 */
 	protected int len_obSeq;
+
 	/**
 	 * number of state in the model example: number of urns
 	 */
 	protected int num_states;
+
 	/**
 	 * number of observation symbols per state example: how many different
 	 * colour balls there are
 	 */
 	protected int num_symbols;
+
 	/**
 	 * number of states the model is allowed to jump
 	 */
 	protected final int delta = 2;
+
 	/**
 	 * discrete set of observation symbols example: sequence of colour of balls
 	 */
 	protected int obSeq[][];
+
 	/**
 	 * current observation sequence
 	 */
 	protected int currentSeq[];
+
 	/**
 	 * number of observation sequence
 	 */
 	protected int num_obSeq;
+
 	/**
 	 * state transition probability example: probability from one state to
 	 * another state
 	 */
 	protected double transition[][];
+
 	/**
 	 * discrete output probability example: probability of a specific output
 	 * from a state
 	 */
 	protected double output[][];
+
 	/**
 	 * initial state distribution example: which state is the starting state
 	 */
 	protected double pi[];
+
 	/**
 	 * forward variable alpha
 	 */
 	protected double alpha[][];
+
 	/**
 	 * backward variable beta
 	 */
 	protected double beta[][];
+
 	/**
 	 * Scale Coefficient
 	 */
 	protected double scaleFactor[];
+
 	/**
 	 * variable for viterbi algorithm
 	 */
 	private int psi[][];
+
 	/**
 	 * best state sequence
 	 */
@@ -138,7 +104,7 @@ public class HiddenMarkov {
 	 * viterbi algorithm used to get best state sequence and probability<br>
 	 * calls: none<br>
 	 * called by: volume
-	 * 
+	 *
 	 * @param testSeq
 	 *            test sequence
 	 * @return probability
@@ -205,7 +171,7 @@ public class HiddenMarkov {
 	 * rescales backward variable beta to prevent underflow<br>
 	 * calls: none<br>
 	 * called by: HiddenMarkov
-	 * 
+	 *
 	 * @param t
 	 *            index number of backward variable beta
 	 */
@@ -219,7 +185,7 @@ public class HiddenMarkov {
 	 * rescales forward variable alpha to prevent underflow<br>
 	 * calls: none<br>
 	 * called by: HiddenMarkov
-	 * 
+	 *
 	 * @param t
 	 *            index number of forward variable alpha
 	 */
@@ -241,7 +207,7 @@ public class HiddenMarkov {
 	 * returns the probability calculated from the testing sequence<br>
 	 * calls: none<br>
 	 * called by: volume
-	 * 
+	 *
 	 * @param testSeq
 	 *            testing sequence
 	 * @return probability of observation sequence given the model
@@ -257,7 +223,7 @@ public class HiddenMarkov {
 	 * calculate forward variable alpha<br>
 	 * calls: none<br>
 	 * called by: HiddenMarkov
-	 * 
+	 *
 	 * @return probability
 	 */
 	protected double computeAlpha() {
@@ -358,7 +324,7 @@ public class HiddenMarkov {
 	 * set the number of training sequences<br>
 	 * calls: none<br>
 	 * called by: trainHMM
-	 * 
+	 *
 	 * @param k
 	 *            number of training sequences
 	 */
@@ -371,7 +337,7 @@ public class HiddenMarkov {
 	 * set a training sequence for re-estimation step<br>
 	 * calls: none<br>
 	 * called by: trainHMM
-	 * 
+	 *
 	 * @param k
 	 *            index representing kth training sequence
 	 * @param trainSeq
@@ -385,7 +351,7 @@ public class HiddenMarkov {
 	 * set training sequences for re-estimation step<br>
 	 * calls: none<br>
 	 * called by: trainHMM
-	 * 
+	 *
 	 * @param trainSeq
 	 *            training sequences
 	 */
@@ -436,8 +402,7 @@ public class HiddenMarkov {
 
 				if (j < i || j > i + delta) {
 					newTransition[i][j] = 0;
-				}
-				else {
+				} else {
 					for (int k = 0; k < num_obSeq; k++) {
 						numerator[k] = denominator[k] = 0;
 						setObSeq(obSeq[k]);
@@ -445,7 +410,8 @@ public class HiddenMarkov {
 						sumP += computeAlpha();
 						computeBeta();
 						for (int t = 0; t < len_obSeq - 1; t++) {
-							numerator[k] += alpha[t][i] * transition[i][j] * output[j][currentSeq[t + 1]] * beta[t + 1][j];
+							numerator[k] += alpha[t][i] * transition[i][j] * output[j][currentSeq[t + 1]]
+									* beta[t + 1][j];
 							denominator[k] += alpha[t][i] * beta[t][i];
 						}
 					}
@@ -499,7 +465,7 @@ public class HiddenMarkov {
 	 * set observation sequence<br>
 	 * calls: none<br>
 	 * called by: trainHMM
-	 * 
+	 *
 	 * @param observationSeq
 	 *            observation sequence
 	 */
@@ -517,7 +483,7 @@ public class HiddenMarkov {
 	 * class constructor - used to create a model from a saved file<br>
 	 * calls: none<br>
 	 * called by: volume, trainHMM
-	 * 
+	 *
 	 * @param word
 	 *            path of the file to load
 	 */
@@ -540,7 +506,7 @@ public class HiddenMarkov {
 	 * observation sequences for training<br>
 	 * calls: none<br>
 	 * called by: trainHMM
-	 * 
+	 *
 	 * @param num_states
 	 *            number of states in the model
 	 * @param num_symbols
@@ -576,9 +542,8 @@ public class HiddenMarkov {
 			for (int j = 0; j < num_states; j++) {
 				if (j < i || j > i + delta) {
 					transition[i][j] = 0;// R-L prob=0 for L-R HMM, and with
-											// Delta
-				}
-				else {
+					// Delta
+				} else {
 					double randNum = Math.random();
 					transition[i][j] = randNum;
 					// System.out.println("transition init: "+transition[i][j]);
@@ -597,7 +562,7 @@ public class HiddenMarkov {
 	 * save HMM model to file<br>
 	 * calls: none<br>
 	 * called by: trainHMM
-	 * 
+	 *
 	 * @param filepath
 	 *            file location
 	 */

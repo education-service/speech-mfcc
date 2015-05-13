@@ -1,36 +1,22 @@
-/*
-  Please feel free to use/modify this class. 
-  If you give me credit by keeping this information or
-  by sending me an email before using it or by reporting bugs , i will be happy.
-  Email : gtiwari333@gmail.com,
-  Blog : http://ganeshtiwaridotcomdotnp.blogspot.com/ 
- */
 package edu.ustc.audio.feature;
 
 /**
- * calculates energy from given PCM of a frame
- * 
- * @author Madhav Pandey
- * @reference Spectral Features for Automatic Text-Independent Speaker
- *            Recognition @author Tomi Kinnunen, @fromPage ##
+ *  从一个给定帧的PCM中计算能量
+ * @reference Spectral Features for Automatic Text-Independent Speaker Recognition @author Tomi Kinnunen, @fromPage ##
+ *
+ * @author wanggang
+ *
  */
 public class Energy {
 
-	/**
-     *
-     */
 	private int samplePerFrame;
 
-	/**
-	 * 
-	 * @param samplePerFrame
-	 */
 	public Energy(int samplePerFrame) {
 		this.samplePerFrame = samplePerFrame;
 	}
 
 	/**
-	 * 
+	 *
 	 * @param framedSignal
 	 * @return energy of given PCM frame
 	 */

@@ -85,7 +85,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>zx.soft.ui.Start</mainClass>
+							<mainClass>edu.ustc.main.HMM_VQ_Speech_Recognition</mainClass>
 						</manifest>
 					</archive>
 					<descriptorRefs>

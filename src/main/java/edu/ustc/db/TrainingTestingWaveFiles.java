@@ -1,21 +1,12 @@
-/*
-  Please feel free to use/modify this class. 
-  If you give me credit by keeping this information or
-  by sending me an email before using it or by reporting bugs , i will be happy.
-  Email : gtiwari333@gmail.com,
-  Blog : http://ganeshtiwaridotcomdotnp.blogspot.com/ 
- */
 package edu.ustc.db;
 
 import java.io.File;
 
-
 /**
- * various operations relating to reading train/testing wav folders<br>
- * works according to the filePath supplied in constructor arguement
- * 
- * @author Ganesh Tiwari
- * 
+ * 该类包含读去训练/测试wav文件目录的不同操作
+ *
+ * @author wanggang
+ *
  */
 public class TrainingTestingWaveFiles {
 
@@ -26,33 +17,33 @@ public class TrainingTestingWaveFiles {
 	/**
 	 * MAKE SURE THAT Files are/will be in this folder structure the folder
 	 * structure for training : (Selected)DBROOTFOLDER\
-	 * \speechTrainWav\\apple\\apple01.wav 
+	 * \speechTrainWav\\apple\\apple01.wav
 	 * \speechTrainWav\\apple\\apple02.wav
-	 * \speechTestWav\\cat\\cat01.wav 
 	 * \speechTestWav\\cat\\cat01.wav
-	 * \speechTestWav\\cat\\cat01.wav 
+	 * \speechTestWav\\cat\\cat01.wav
+	 * \speechTestWav\\cat\\cat01.wav
 	 * \speakerTrainWav\\userA\\userA1.wav
-	 * \codeBook\\codeBook.cbk 
+	 * \codeBook\\codeBook.cbk
 	 * \models\\HMM\\apple.hmm \models\\HMM\\cat.hmm
-	 * 
+	 *
 	 */
+
 	/**
 	 * constructor, sets the wavFile path according to the args supplied
-	 * 
+	 *
 	 * @param hmmOrGmm
 	 * @param testOrTrain
 	 */
 	public TrainingTestingWaveFiles(String testOrTrain) {
 		if (testOrTrain.equalsIgnoreCase("test")) {
-			setWavPath(new File( "TestWav"));
+			setWavPath(new File("TestWav"));
 		} else if (testOrTrain.equalsIgnoreCase("train")) {
-			setWavPath(new File( "TrainWav"));
+			setWavPath(new File("TrainWav"));
 		}
-
 	}
 
 	private void readFolder() {
-//		System.out.println(getWavPath().getAbsolutePath());
+		//		System.out.println(getWavPath().getAbsolutePath());
 		folderNames = new String[getWavPath().list().length];
 		folderNames = getWavPath().list();// must return only folders
 	}
@@ -67,7 +58,7 @@ public class TrainingTestingWaveFiles {
 		waveFiles = new File[folderNames.length][];
 		for (int i = 0; i < folderNames.length; i++) {
 			System.out.println(folderNames[i]);
-			File wordDir = new File(getWavPath() + "\\" + folderNames[i]+"\\");
+			File wordDir = new File(getWavPath() + "\\" + folderNames[i] + "\\");
 			waveFiles[i] = wordDir.listFiles();
 		}
 		System.out.println("++++++Folder's Content+++++");
@@ -78,7 +69,6 @@ public class TrainingTestingWaveFiles {
 			System.out.println();
 		}
 		return waveFiles;
-
 	}
 
 	public File getWavPath() {
@@ -89,4 +79,5 @@ public class TrainingTestingWaveFiles {
 		this.wavPath = wavPath;
 		System.out.println("Current wav file Path   :" + this.wavPath.getName());
 	}
+
 }
