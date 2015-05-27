@@ -1,7 +1,5 @@
 package edu.ustc.audio;
 
-import edu.ustc.audio.preProcessings.EndPointDetection;
-
 /**
  * 预处理过程
  *
@@ -62,8 +60,8 @@ public class PreProcess {
 		// calculate no of frames, for framing
 
 		noOfFrames = 2 * afterEndPtDetection.length / samplePerFrame - 1;
-		System.out.println("noOfFrames       " + noOfFrames + "  samplePerFrame     " + samplePerFrame
-				+ "  EPD length   " + afterEndPtDetection.length);
+		//		System.out.println("noOfFrames       " + noOfFrames + "  samplePerFrame     " + samplePerFrame
+		//				+ "  EPD length   " + afterEndPtDetection.length);
 		framedSignal = new float[noOfFrames][samplePerFrame];
 		for (int i = 0; i < noOfFrames; i++) {
 			int startIndex = (i * samplePerFrame / 2);
