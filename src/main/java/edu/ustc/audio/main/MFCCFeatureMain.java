@@ -18,7 +18,7 @@ public class MFCCFeatureMain {
 	private static final int SAMPLING_RATE = 1020; // (int) fc.getRate();
 	// int samplePerFrame = 256; // 16ms for 8 khz
 	private static final int SAMPLE_PER_FRAME = 256; // 512,23.22ms
-	private static final int FEATURE_DIMENSION = 39;
+	private static final int FEATURE_DIMENSION = 36; // 39
 	private FeatureExtract featureExtract;
 	private WaveData waveData;
 	private PreProcess prp;
@@ -45,8 +45,74 @@ public class MFCCFeatureMain {
 		 * 将data下面的train和test的所有音频文件的特征写到对应的文件夹下面，SimpleSVM格式
 		 * 分别为data/train/train_bc,data/test/test_bc
 		 */
-		mfcc.writeFeaturesSimpleSVM("train");
-		mfcc.writeFeaturesSimpleSVM("test");
+		//		mfcc.writeFeaturesSimpleSVM("train");
+		//		mfcc.writeFeaturesSimpleSVM("test");
+		/**
+		 * 将data下面的train和test的所有音频文件的特征写到对应的文件夹下面，CNN格式
+		 * 分别为data/train/train.format,data/test/test.format,data/test/test.label
+		 */
+		mfcc.writeFeaturesCNNTrain();
+		mfcc.writeFeaturesCNNTest();
+	}
+
+	/**
+	 * 按照CNN格式输出,1-male,0-female
+	 */
+	public void writeFeaturesCNNTrain() {
+		String dataName = BASE_DIR + "/train/train.format";
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File(dataName)));) {
+			File maleDir = new File(BASE_DIR + "/train/male");
+			for (File f : maleDir.listFiles()) {
+				System.out.println(f.getPath());
+				bw.write(transFeature2CNNStr(getFeature(f.getPath())) + ",1");
+				bw.newLine();
+			}
+			File femaleDir = new File(BASE_DIR + "/train/female");
+			for (File f : femaleDir.listFiles()) {
+				System.out.println(f.getPath());
+				bw.write(transFeature2CNNStr(getFeature(f.getPath())) + ",0");
+				bw.newLine();
+			}
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	public void writeFeaturesCNNTest() {
+		String dataName = BASE_DIR + "/test/test.format";
+		String labelName = BASE_DIR + "/test/test.label";
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File(dataName)));
+				BufferedWriter label = new BufferedWriter(new FileWriter(new File(labelName)));) {
+			File maleDir = new File(BASE_DIR + "/test/male");
+			for (File f : maleDir.listFiles()) {
+				System.out.println(f.getPath());
+				bw.write(transFeature2CNNStr(getFeature(f.getPath())));
+				bw.newLine();
+				label.write("1");
+				label.newLine();
+			}
+			File femaleDir = new File(BASE_DIR + "/test/female");
+			for (File f : femaleDir.listFiles()) {
+				System.out.println(f.getPath());
+				bw.write(transFeature2CNNStr(getFeature(f.getPath())));
+				bw.newLine();
+				label.write("0");
+				label.newLine();
+			}
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	/**
+	 * 将特征数据转换成CNN格式，针对每条数据
+	 */
+	private String transFeature2CNNStr(double[] feature) {
+		StringBuffer sb = new StringBuffer();
+		for (double f : feature) {
+			sb.append(f + "").append(",");
+		}
+		return sb.toString().substring(0, sb.length() - 1);
 	}
 
 	/**
