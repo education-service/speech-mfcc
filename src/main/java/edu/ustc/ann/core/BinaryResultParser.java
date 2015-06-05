@@ -6,7 +6,7 @@ package edu.ustc.ann.core;
 public class BinaryResultParser implements IResultParser<Integer> {
 
 	@Override
-	public int countSuccesses(int success, float fOut, float t) {
+	public int countSuccesses(int success, double fOut, double t) {
 		if ((fOut < 0.5 && t == 0) || (fOut >= 0.5 && t == 1))
 			success += 1;
 
@@ -14,7 +14,7 @@ public class BinaryResultParser implements IResultParser<Integer> {
 	}
 
 	@Override
-	public Integer parseResult(float result) {
+	public Integer parseResult(double result) {
 		return (result < 0.5) ? 0 : 1;
 	}
 

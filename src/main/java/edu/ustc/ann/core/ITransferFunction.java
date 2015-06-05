@@ -5,6 +5,6 @@ package edu.ustc.ann.core;
  */
 public interface ITransferFunction {
 
-	float transfer(float value);
+	double transfer(double value);
 
 }

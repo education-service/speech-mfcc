@@ -6,8 +6,8 @@ package edu.ustc.ann.core;
 public class SigmoidFunction implements ITransferFunction {
 
 	@Override
-	public float transfer(float value) {
-		return (float) (1 / (1 + Math.exp(-value)));
+	public double transfer(double value) {
+		return 1 / (1 + Math.exp(-value));
 	}
 
 }

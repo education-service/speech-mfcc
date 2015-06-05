@@ -7,16 +7,16 @@ public class NeuralNetwork {
 
 	private int nElements;
 	private int dimension;
-	private float[][] inputs;
+	private double[][] inputs;
 	private int[] outputs;
-	private float[] bias;
-	private float[] vWeights;
-	private float[][] wWeights;
-	private float fOut;
+	private double[] bias;
+	private double[] vWeights;
+	private double[][] wWeights;
+	private double fOut;
 	private int neurons;
-	private float bOut;
+	private double bOut;
 	// 默认迭代次数
-	private int iterationsLimit = 10000;
+	private int iterationsLimit = 50000;
 
 	private Analyzer analyzer;
 	private Learner learner;
@@ -26,7 +26,7 @@ public class NeuralNetwork {
 
 	private INeuralNetworkCallback neuralNetworkCallback = null;
 
-	public NeuralNetwork(float[][] inputs, int[] output, INeuralNetworkCallback neuralNetworkCallback) {
+	public NeuralNetwork(double[][] inputs, int[] output, INeuralNetworkCallback neuralNetworkCallback) {
 		bOut = Utils.randFloat(-0.5f, 0.5f);
 		this.neuralNetworkCallback = neuralNetworkCallback;
 		// 默认传递函数
@@ -73,8 +73,8 @@ public class NeuralNetwork {
 		}
 	}
 
-	private float[] getRowElements(int row) {
-		float[] elements = new float[dimension];
+	private double[] getRowElements(int row) {
+		double[] elements = new double[dimension];
 		for (int i = 0; i < dimension; i++) {
 			elements[i] = this.inputs[row][i];
 		}
@@ -113,10 +113,13 @@ public class NeuralNetwork {
 
 		@Override
 		public void run() {
-			float quadraticError = 0;
-			float[] f;
+			double quadraticError = 0;
+			double[] f;
 			int success = 0;
 			for (int i = 0; i < iterationsLimit; i++) {
+				if (i % 100 == 0) {
+					System.out.println("Iterator at: " + i);
+				}
 				success = 0;
 				for (int z = 0; z < nElements; z++) {
 					analyzer = new Analyzer(getRowElements(z), wWeights, bias, vWeights, bOut, neurons,
@@ -134,11 +137,10 @@ public class NeuralNetwork {
 				}
 				quadraticError *= 0.5f;
 			}
-			float successPercentage = (success / (float) nElements) * 100;
+			double successPercentage = (success / (double) nElements) * 100;
 			Result result = new Result(analyzer, resultParser, successPercentage, quadraticError);
 			neuralNetworkCallback.success(result);
 		}
-
 	}
 
 }

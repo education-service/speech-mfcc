@@ -11,13 +11,13 @@ import java.util.List;
  */
 public class DataUtils {
 
-	public static float[][] readInputsFromFile(String fileURI) {
-		float[][] fArray = new float[0][];
+	public static double[][] readInputsFromFile(String fileURI) {
+		double[][] fArray = new double[0][];
 
 		List<String> lines = null;
 		try {
 			lines = Files.readAllLines(Paths.get(fileURI), StandardCharsets.UTF_8);
-			fArray = new float[lines.size()][];
+			fArray = new double[lines.size()][];
 
 			for (int i = 0; i < lines.size(); i++) {
 				fArray[i] = convertStringArrayToFloatArray(lines.get(i).split(","));
@@ -47,11 +47,11 @@ public class DataUtils {
 		return iArray;
 	}
 
-	private static float[] convertStringArrayToFloatArray(String[] num) {
+	private static double[] convertStringArrayToFloatArray(String[] num) {
 		if (num != null) {
-			float fArray[] = new float[num.length];
+			double fArray[] = new double[num.length];
 			for (int i = 0; i < num.length; i++) {
-				fArray[i] = Float.parseFloat(num[i]);
+				fArray[i] = Double.parseDouble(num[i]);
 			}
 			return fArray;
 		}

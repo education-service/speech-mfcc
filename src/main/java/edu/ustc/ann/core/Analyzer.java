@@ -5,19 +5,19 @@ package edu.ustc.ann.core;
  */
 public class Analyzer {
 
-	private float[] fOutArray;
-	private float[][] wWeights;
-	private float[] vWeights;
-	private float[] bias;
-	private float fOut;
-	private float bOut;
+	private double[] fOutArray;
+	private double[][] wWeights;
+	private double[] vWeights;
+	private double[] bias;
+	private double fOut;
+	private double bOut;
 	private int dimension;
 	private int neurons;
 	private ITransferFunction transferFunction;
 
-	public Analyzer(float[] x, float[][] wWeights, float[] bias, float[] vWeights, float bOut, int neurons,
+	public Analyzer(double[] x, double[][] wWeights, double[] bias, double[] vWeights, double bOut, int neurons,
 			ITransferFunction transferFunction, int dimension) {
-		this.fOutArray = new float[neurons];
+		this.fOutArray = new double[neurons];
 		this.wWeights = wWeights;
 		this.bias = bias;
 		this.vWeights = vWeights;
@@ -28,9 +28,9 @@ public class Analyzer {
 		this.fOut = calculateFOut(x);
 	}
 
-	private float calculateFOut(float[] x) {
+	private double calculateFOut(double[] x) {
 		for (int i = 0; i < neurons; i++) {
-			float sum = 0;
+			double sum = 0;
 			for (int j = 0; j < dimension; j++) {
 				sum = sum + (x[j] * wWeights[j][i]);
 			}
@@ -46,15 +46,15 @@ public class Analyzer {
 		return transferFunction.transfer(fOut + bOut);
 	}
 
-	public float[] getFOutArray() {
+	public double[] getFOutArray() {
 		return fOutArray;
 	}
 
-	public float getFOut() {
+	public double getFOut() {
 		return fOut;
 	}
 
-	public float getFOut(float[] x) {
+	public double getFOut(double[] x) {
 		return calculateFOut(x);
 	}
 

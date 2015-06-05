@@ -5,27 +5,27 @@ package edu.ustc.ann.core;
  */
 public class HiddenLayerNeuron {
 
-	private float[] bias;
-	private float[] vWeights;
-	private float[][] wWeights;
+	private double[] bias;
+	private double[] vWeights;
+	private double[][] wWeights;
 
 	public HiddenLayerNeuron(int neurons, int dimension) throws ZeroNeuronsException, ZeroInputDimensionException {
-		this.bias = new float[neurons];
-		this.vWeights = new float[neurons];
-		this.wWeights = new float[dimension][neurons];
+		this.bias = new double[neurons];
+		this.vWeights = new double[neurons];
+		this.wWeights = new double[dimension][neurons];
 
 		initWeights(neurons, dimension);
 	}
 
-	public float[] getBias() {
+	public double[] getBias() {
 		return this.bias;
 	}
 
-	public float[] getVWeights() {
+	public double[] getVWeights() {
 		return this.vWeights;
 	}
 
-	public float[][] getWWeights() {
+	public double[][] getWWeights() {
 		return this.wWeights;
 	}
 

@@ -6,27 +6,27 @@ package edu.ustc.ann.core;
 @SuppressWarnings("rawtypes")
 public class Result {
 
-	private float successPercentage;
-	private float quadraticError;
+	private double successPercentage;
+	private double quadraticError;
 	private Analyzer analyzer;
 	private IResultParser resultParser;
 
-	public Result(Analyzer analyzer, IResultParser resultParser, float successPercentage, float quadraticError) {
+	public Result(Analyzer analyzer, IResultParser resultParser, double successPercentage, double quadraticError) {
 		this.analyzer = analyzer;
 		this.successPercentage = successPercentage;
 		this.quadraticError = quadraticError;
 		this.resultParser = resultParser;
 	}
 
-	public int predictValue(float[] element) {
+	public int predictValue(double[] element) {
 		return (Integer) resultParser.parseResult(analyzer.getFOut(element));
 	}
 
-	public float getSuccessPercentage() {
+	public double getSuccessPercentage() {
 		return successPercentage;
 	}
 
-	public float getQuadraticError() {
+	public double getQuadraticError() {
 		return quadraticError;
 	}
 

@@ -18,7 +18,7 @@ public class MFCCFeatureMain {
 	private static final int SAMPLING_RATE = 1020; // (int) fc.getRate();
 	// int samplePerFrame = 256; // 16ms for 8 khz
 	private static final int SAMPLE_PER_FRAME = 256; // 512,23.22ms
-	private static final int FEATURE_DIMENSION = 36; // 39
+	private static final int FEATURE_DIMENSION = 39;
 	private FeatureExtract featureExtract;
 	private WaveData waveData;
 	private PreProcess prp;
@@ -51,8 +51,39 @@ public class MFCCFeatureMain {
 		 * 将data下面的train和test的所有音频文件的特征写到对应的文件夹下面，CNN格式
 		 * 分别为data/train/train.format,data/test/test.format,data/test/test.label
 		 */
-		mfcc.writeFeaturesCNNTrain();
-		mfcc.writeFeaturesCNNTest();
+		//		mfcc.writeFeaturesCNNTrain();
+		//		mfcc.writeFeaturesCNNTest();
+		mfcc.writeFeaturesANN("train");
+		mfcc.writeFeaturesANN("test");
+	}
+
+	/**
+	 * 按照ANN格式输出,1-male,0-female
+	 */
+	public void writeFeaturesANN(String dirName) {
+		String dataName = BASE_DIR + "/" + dirName + "/" + dirName + ".feature";
+		String labelName = BASE_DIR + "/" + dirName + "/" + dirName + ".label";
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File(dataName)));
+				BufferedWriter label = new BufferedWriter(new FileWriter(new File(labelName)));) {
+			File maleDir = new File(BASE_DIR + "/" + dirName + "/male");
+			for (File f : maleDir.listFiles()) {
+				System.out.println(f.getPath());
+				bw.write(transFeature2CNNStr(getFeature(f.getPath())));
+				bw.newLine();
+				label.write("1");
+				label.newLine();
+			}
+			File femaleDir = new File(BASE_DIR + "/" + dirName + "/female");
+			for (File f : femaleDir.listFiles()) {
+				System.out.println(f.getPath());
+				bw.write(transFeature2CNNStr(getFeature(f.getPath())));
+				bw.newLine();
+				label.write("0");
+				label.newLine();
+			}
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	/**

@@ -5,16 +5,16 @@ package edu.ustc.ann.core;
  */
 public class Learner {
 
-	private float[] bias;
-	private float[] vWeights;
-	private float[][] wWeights;
-	private float bOut;
+	private double[] bias;
+	private double[] vWeights;
+	private double[][] wWeights;
+	private double bOut;
 
-	public Learner(float t, float fOut, float[] f, float[] vWeights, float[][] wWeights, float[] bias, float bOut,
-			int neurons, float[] x, int dimension) {
-		this.bias = new float[neurons];
-		this.vWeights = new float[neurons];
-		this.wWeights = new float[dimension][neurons];
+	public Learner(double t, double fOut, double[] f, double[] vWeights, double[][] wWeights, double[] bias,
+			double bOut, int neurons, double[] x, int dimension) {
+		this.bias = new double[neurons];
+		this.vWeights = new double[neurons];
+		this.wWeights = new double[dimension][neurons];
 
 		initLearn(t, fOut, f, vWeights, wWeights, bias, bOut, neurons, x, dimension);
 	}
@@ -32,15 +32,15 @@ public class Learner {
 	 * @param x Inputs
 	 * @param dimension Dimension of inputs
 	 */
-	private void initLearn(float t, float fOut, float[] f, float[] vWeights, float[][] wWeights, float[] bias,
-			float bOut, int neurons, float[] x, int dimension) {
-		float error = t - fOut;
-		float n = 0.05f;
-		float dv;
-		float[] dwi = new float[neurons];
-		float[][] dw = new float[dimension][neurons];
-		float[] dbi = new float[neurons];
-		float[] db = new float[neurons];
+	private void initLearn(double t, double fOut, double[] f, double[] vWeights, double[][] wWeights, double[] bias,
+			double bOut, int neurons, double[] x, int dimension) {
+		double error = t - fOut;
+		double n = 0.05f;
+		double dv;
+		double[] dwi = new double[neurons];
+		double[][] dw = new double[dimension][neurons];
+		double[] dbi = new double[neurons];
+		double[] db = new double[neurons];
 
 		// Modify v weights
 		dv = fOut * (1 - fOut) * error;
@@ -49,7 +49,7 @@ public class Learner {
 		}
 
 		// Modify bias out
-		float dbOut = n * dv * 1;
+		double dbOut = n * dv * 1;
 		this.bOut = (bOut + dbOut);
 
 		// Modify w weights
@@ -69,19 +69,19 @@ public class Learner {
 		}
 	}
 
-	public float[] getBias() {
+	public double[] getBias() {
 		return bias;
 	}
 
-	public float[] getVWeights() {
+	public double[] getVWeights() {
 		return vWeights;
 	}
 
-	public float[][] getWWeights() {
+	public double[][] getWWeights() {
 		return wWeights;
 	}
 
-	public float getBOut() {
+	public double getBOut() {
 		return bOut;
 	}
 

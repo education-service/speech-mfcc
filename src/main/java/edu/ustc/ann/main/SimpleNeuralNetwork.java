@@ -1,5 +1,12 @@
 package edu.ustc.ann.main;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import edu.ustc.ann.core.DataUtils;
 import edu.ustc.ann.core.Error;
 import edu.ustc.ann.core.INeuralNetworkCallback;
@@ -12,16 +19,32 @@ public class SimpleNeuralNetwork {
 
 		System.out.println("开始计算 ... ");
 
-		float[][] feature = DataUtils.readInputsFromFile("data/ann/feature");
-		int[] label = DataUtils.readOutputsFromFile("data/ann/label");
+		double[][] trainFeatures = DataUtils.readInputsFromFile("data/train/train.feature");
+		int[] label = DataUtils.readOutputsFromFile("data/train/train.label");
 
-		NeuralNetwork neuralNetwork = new NeuralNetwork(feature, label, new INeuralNetworkCallback() {
+		NeuralNetwork neuralNetwork = new NeuralNetwork(trainFeatures, label, new INeuralNetworkCallback() {
 
 			@Override
 			public void success(Result result) {
-				float[] valueToPredict = new float[] { -0.205f, 0.780f };
-				System.out.println("准确率: " + result.getSuccessPercentage());
-				System.out.println("预测结果: " + result.predictValue(valueToPredict));
+				System.out.println("训练准确率: " + result.getSuccessPercentage());
+				double[][] testFeatures = DataUtils.readInputsFromFile("data/test/test.feature");
+				List<String> predict = new ArrayList<>();
+				for (int i = 0; i < testFeatures.length; i++) {
+					predict.add(result.predictValue(testFeatures[i]) + "");
+				}
+				try (BufferedReader br = new BufferedReader(new FileReader(new File("data/test/test.label")));) {
+					String label;
+					int count = 0;
+					int index = 0;
+					while ((label = br.readLine()) != null) {
+						if (label.equalsIgnoreCase(predict.get(index++))) {
+							count++;
+						}
+					}
+					System.out.println("测试数据准确率：" + ((double) count / predict.size()));
+				} catch (IOException e) {
+					throw new RuntimeException(e);
+				}
 			}
 
 			@Override
@@ -34,5 +57,4 @@ public class SimpleNeuralNetwork {
 		neuralNetwork.startLearning();
 		System.out.println("完成计算 ... ");
 	}
-
 }

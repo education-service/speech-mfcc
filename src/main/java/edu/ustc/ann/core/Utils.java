@@ -6,8 +6,8 @@ public class Utils {
 
 	private static final Random RANDOM = new Random();
 
-	public static float randFloat(float min, float max) {
-		return RANDOM.nextFloat() * (max - min) + min;
+	public static double randFloat(double min, double max) {
+		return RANDOM.nextDouble() * (max - min) + min;
 	}
 
 }

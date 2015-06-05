@@ -8,11 +8,11 @@ public interface IResultParser<T> {
 	/**
 	 * 计算正确的数量
 	 */
-	int countSuccesses(int success, float fOut, float t);
+	int countSuccesses(int success, double fOut, double t);
 
 	/**
 	 * 对输出函数获得的值转换为真实结果
 	 */
-	T parseResult(float result);
+	T parseResult(double result);
 
 }
