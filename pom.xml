@@ -110,7 +110,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>edu.ustc.main.HMM_VQ_Speech_Recognition</mainClass>
+							<mainClass>edu.ustc.speech.driver.SpeechMFCCDriver</mainClass>
 						</manifest>
 					</archive>
 					<descriptorRefs>

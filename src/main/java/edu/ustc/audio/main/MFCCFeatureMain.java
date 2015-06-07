@@ -35,34 +35,52 @@ public class MFCCFeatureMain {
 	 */
 	public static void main(String[] args) {
 		MFCCFeatureMain mfcc = new MFCCFeatureMain();
+		if (args.length != 1) {
+			System.err.println("Usage: <string-type> e.g. knn--KNN,svmiris--SVM-Iris,svm--SVM,ann--ANN");
+			System.exit(-1);
+		}
 		/**
 		 * 将data下面的train和test的所有音频文件的特征写到对应的文件夹下面，Iris格式
-		 * 分别为data/train/train.data,data/test/test.data
+		 * 分别为data/knn/train.data,data/knn/test.data
 		 */
-		//		mfcc.writeFeaturesIris("train");
-		//		mfcc.writeFeaturesIris("test");
+		if ("knn".equalsIgnoreCase(args[0])) {
+			mfcc.writeFeaturesKnn("train");
+			mfcc.writeFeaturesKnn("test");
+		}
+		/**
+		 * 将data下面的train和test的所有音频文件的特征写到对应的文件夹下面，Iris格式
+		 * 分别为data/svm-iris/train.data,data/svm-iris/test.data
+		 */
+		if ("svmiris".equalsIgnoreCase(args[0])) {
+			mfcc.writeFeaturesIris("train");
+			mfcc.writeFeaturesIris("test");
+		}
 		/**
 		 * 将data下面的train和test的所有音频文件的特征写到对应的文件夹下面，SimpleSVM格式
-		 * 分别为data/train/train_bc,data/test/test_bc
+		 * 分别为data/svm/train_bc,data/svm/test_bc
 		 */
-		//		mfcc.writeFeaturesSimpleSVM("train");
-		//		mfcc.writeFeaturesSimpleSVM("test");
+		if ("svm".equalsIgnoreCase(args[0])) {
+			mfcc.writeFeaturesSimpleSVM("train");
+			mfcc.writeFeaturesSimpleSVM("test");
+		}
 		/**
 		 * 将data下面的train和test的所有音频文件的特征写到对应的文件夹下面，CNN格式
-		 * 分别为data/train/train.format,data/test/test.format,data/test/test.label
+		 * 分别为data/ann/train.feature,data/ann/train.label,data/ann/test.feature,data/ann/test.label
 		 */
-		//		mfcc.writeFeaturesCNNTrain();
-		//		mfcc.writeFeaturesCNNTest();
-		mfcc.writeFeaturesANN("train");
-		mfcc.writeFeaturesANN("test");
+		if ("ann".equalsIgnoreCase(args[0])) {
+			//		mfcc.writeFeaturesCNNTrain();
+			//		mfcc.writeFeaturesCNNTest();
+			mfcc.writeFeaturesANN("train");
+			mfcc.writeFeaturesANN("test");
+		}
 	}
 
 	/**
 	 * 按照ANN格式输出,1-male,0-female
 	 */
 	public void writeFeaturesANN(String dirName) {
-		String dataName = BASE_DIR + "/" + dirName + "/" + dirName + ".feature";
-		String labelName = BASE_DIR + "/" + dirName + "/" + dirName + ".label";
+		String dataName = BASE_DIR + "/ann/" + dirName + ".feature";
+		String labelName = BASE_DIR + "/ann/" + dirName + ".label";
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File(dataName)));
 				BufferedWriter label = new BufferedWriter(new FileWriter(new File(labelName)));) {
 			File maleDir = new File(BASE_DIR + "/" + dirName + "/male");
@@ -149,8 +167,31 @@ public class MFCCFeatureMain {
 	/**
 	 * 按照Iris格式输出
 	 */
+	public void writeFeaturesKnn(String dirName) {
+		String dataName = BASE_DIR + "/knn/" + dirName + ".data";
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File(dataName)));) {
+			File maleDir = new File(BASE_DIR + "/" + dirName + "/male");
+			for (File f : maleDir.listFiles()) {
+				System.out.println(f.getPath());
+				bw.write(transFeature2IrisStr(getFeature(f.getPath()), "male"));
+				bw.newLine();
+			}
+			File femaleDir = new File(BASE_DIR + "/" + dirName + "/female");
+			for (File f : femaleDir.listFiles()) {
+				System.out.println(f.getPath());
+				bw.write(transFeature2IrisStr(getFeature(f.getPath()), "female"));
+				bw.newLine();
+			}
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	/**
+	 * 按照Iris格式输出
+	 */
 	public void writeFeaturesIris(String dirName) {
-		String dataName = BASE_DIR + "/" + dirName + "/" + dirName + ".data";
+		String dataName = BASE_DIR + "/svm-iris/" + dirName + ".data";
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File(dataName)));) {
 			File maleDir = new File(BASE_DIR + "/" + dirName + "/male");
 			for (File f : maleDir.listFiles()) {
@@ -185,7 +226,7 @@ public class MFCCFeatureMain {
 	 * 按照SimpleSVM格式输出
 	 */
 	public void writeFeaturesSimpleSVM(String dirName) {
-		String dataName = BASE_DIR + "/" + dirName + "/" + dirName + "_bc";
+		String dataName = BASE_DIR + "/svm/" + dirName + "_bc";
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File(dataName)));) {
 			File maleDir = new File(BASE_DIR + "/" + dirName + "/male");
 			for (File f : maleDir.listFiles()) {

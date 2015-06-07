@@ -16,12 +16,16 @@ public class KNNMain {
 	 * 主函数
 	 */
 	public static void main(String[] args) {
+		if (args.length != 1) {
+			System.err.println("Usage: <int-K>");
+			System.exit(-1);
+		}
+		int K = Integer.parseInt(args[0]);
 		// 读取训练数据和测试数据
-		HashMap<String, Point> train = getData("data/train/train.data");
-		HashMap<String, Point> test = getData("data/test/test.data");
+		HashMap<String, Point> train = getData("data/knn/train.data");
+		HashMap<String, Point> test = getData("data/knn/test.data");
 		// 测试结果
 		int correct = 0; // 统计正确个数
-		int K = 20;
 		for (Entry<String, Point> t : test.entrySet()) {
 			// 当前点的类别
 			String cate = t.getKey().split("-")[1];
@@ -38,8 +42,12 @@ public class KNNMain {
 			}
 			// 计算出类别
 			String calcCate = "female";
-			if (kmap.get("male") > kmap.get("female")) {
+			if (kmap.get("female") == null) {
 				calcCate = "male";
+			} else if (kmap.get("male") != null) {
+				if (kmap.get("male") > kmap.get("female")) {
+					calcCate = "male";
+				}
 			}
 			// 判断计算正确与否，并统计正确个数
 			if (calcCate.equalsIgnoreCase(cate)) {

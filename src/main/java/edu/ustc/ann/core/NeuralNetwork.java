@@ -16,7 +16,7 @@ public class NeuralNetwork {
 	private int neurons;
 	private double bOut;
 	// 默认迭代次数
-	private int iterationsLimit = 50000;
+	private int iterationsLimit = 10000;
 
 	private Analyzer analyzer;
 	private Learner learner;
@@ -26,13 +26,15 @@ public class NeuralNetwork {
 
 	private INeuralNetworkCallback neuralNetworkCallback = null;
 
-	public NeuralNetwork(double[][] inputs, int[] output, INeuralNetworkCallback neuralNetworkCallback) {
+	public NeuralNetwork(double[][] inputs, int[] output, INeuralNetworkCallback neuralNetworkCallback, int iterNum) {
 		bOut = Utils.randFloat(-0.5f, 0.5f);
 		this.neuralNetworkCallback = neuralNetworkCallback;
 		// 默认传递函数
 		this.transferFunction = new SigmoidFunction();
 		// 默认结果解析器
 		this.resultParser = new BinaryResultParser();
+		// 迭代次数
+		this.iterationsLimit = iterNum;
 
 		this.inputs = inputs;
 		this.outputs = output;

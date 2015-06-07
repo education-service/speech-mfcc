@@ -21,6 +21,30 @@ public class SimpleSVM {
 		lambda = paramLambda;
 	}
 
+	/**
+	 * 主函数
+	 */
+	public static void main(String[] args) throws IOException {
+		if (args.length != 1) {
+			System.err.println("Usage: <int-maxIters>");
+			System.exit(-1);
+		}
+		int maxIters = Integer.parseInt(args[0]);
+		double[] Y = new double[200];
+		double[][] X = new double[200][40];
+		String trainFile = "data/svm/train_bc";
+		loadData(X, Y, trainFile);
+
+		SimpleSVM svm = new SimpleSVM(0.0001);
+		svm.Train(X, Y, maxIters); // 7000
+
+		double[] test_y = new double[43];
+		double[][] test_X = new double[43][40];
+		String testFile = "data/svm/test_bc";
+		loadData(test_X, test_y, testFile);
+		svm.Test(test_X, test_y);
+	}
+
 	private void CostAndGrad(double[][] X, double[] y) {
 		cost = 0;
 		for (int m = 0; m < exampleNum; m++) {
@@ -105,7 +129,7 @@ public class SimpleSVM {
 				String line = raf.readLine();
 				if (line == null)
 					break;
-				tokenizer = new StringTokenizer(line, " ");
+				tokenizer = new StringTokenizer(line, "\t");
 				y[index] = Double.parseDouble(tokenizer.nextToken());
 				//System.out.println(y[index]);
 				while (tokenizer.hasMoreTokens()) {
@@ -120,25 +144,6 @@ public class SimpleSVM {
 				index++;
 			}
 		}
-	}
-
-	/**
-	 * 主函数
-	 */
-	public static void main(String[] args) throws IOException {
-		double[] y = new double[400];
-		double[][] X = new double[400][11];
-		String trainFile = "data/simple-svm/train_bc";
-		loadData(X, y, trainFile);
-
-		SimpleSVM svm = new SimpleSVM(0.0001);
-		svm.Train(X, y, 7000);
-
-		double[] test_y = new double[283];
-		double[][] test_X = new double[283][11];
-		String testFile = "data/simple-svm/test_bc";
-		loadData(test_X, test_y, testFile);
-		svm.Test(test_X, test_y);
 	}
 
 }

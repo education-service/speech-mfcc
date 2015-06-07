@@ -9,21 +9,22 @@ import org.apache.commons.io.FilenameUtils;
 
 import com.google.common.io.Files;
 
-public class IrisMain {
+public class SVMIrisMain {
 
-	public static final int PERCENTAGE = 60;
+	// 训练数量的比例
+	public static final int PERCENTAGE = 80;
 
 	private SVM svm = new SVM();
 	private static final String RESULTS_FILE = "svm.results";
 
 	public static void main(String[] args) {
-		// data/iris/iris.data output
+		// data/svm-iris/train.data data/svm-iris/output
 		checkArgLengthAndPrintUsage(args);
 
 		String inputDataPath = args[0];
 		String outputResultsPath = args[1];
 
-		IrisMain driver = new IrisMain();
+		SVMIrisMain driver = new SVMIrisMain();
 		driver.run(inputDataPath, outputResultsPath);
 	}
 

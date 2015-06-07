@@ -46,8 +46,8 @@ public class KNNCore {
 	private static HashMap<String, Double> calcDistances(Point a, HashMap<String, Point> b, int dim) {
 		HashMap<String, Double> d = new HashMap<>();
 		for (Entry<String, Point> t : b.entrySet()) {
-			//			d.put(t.getKey(), calcDistance(a.getCoordinate(), t.getValue().getCoordinate(), dim));
-			d.put(t.getKey(), CosCore.cos(a.getCoordinate(), t.getValue().getCoordinate(), dim));
+			d.put(t.getKey(), calcDistance(a.getCoordinate(), t.getValue().getCoordinate(), dim));
+			//			d.put(t.getKey(), CosCore.cos(a.getCoordinate(), t.getValue().getCoordinate(), dim));
 		}
 		return d;
 	}

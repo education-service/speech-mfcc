@@ -17,22 +17,28 @@ public class SimpleNeuralNetwork {
 
 	public static void main(String[] args) {
 
+		if (args.length != 1) {
+			System.err.println("Usage: <int-iterNum>");
+			System.exit(-1);
+		}
+		int maxIters = Integer.parseInt(args[0]);
+
 		System.out.println("开始计算 ... ");
 
-		double[][] trainFeatures = DataUtils.readInputsFromFile("data/train/train.feature");
-		int[] label = DataUtils.readOutputsFromFile("data/train/train.label");
+		double[][] trainFeatures = DataUtils.readInputsFromFile("data/ann/train.feature");
+		int[] label = DataUtils.readOutputsFromFile("data/ann/train.label");
 
 		NeuralNetwork neuralNetwork = new NeuralNetwork(trainFeatures, label, new INeuralNetworkCallback() {
 
 			@Override
 			public void success(Result result) {
 				System.out.println("训练准确率: " + result.getSuccessPercentage());
-				double[][] testFeatures = DataUtils.readInputsFromFile("data/test/test.feature");
+				double[][] testFeatures = DataUtils.readInputsFromFile("data/ann/test.feature");
 				List<String> predict = new ArrayList<>();
 				for (int i = 0; i < testFeatures.length; i++) {
 					predict.add(result.predictValue(testFeatures[i]) + "");
 				}
-				try (BufferedReader br = new BufferedReader(new FileReader(new File("data/test/test.label")));) {
+				try (BufferedReader br = new BufferedReader(new FileReader(new File("data/ann/test.label")));) {
 					String label;
 					int count = 0;
 					int index = 0;
@@ -52,7 +58,7 @@ public class SimpleNeuralNetwork {
 				System.out.println("Error: " + error.getDescription());
 			}
 
-		});
+		}, maxIters);
 
 		neuralNetwork.startLearning();
 		System.out.println("完成计算 ... ");
