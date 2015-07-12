@@ -1,9 +1,8 @@
 package edu.ustc.knn.core;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
@@ -62,7 +61,8 @@ public class KNNMain {
 
 	public static HashMap<String, Point> getData(String dir) {
 		HashMap<String, Point> data = new HashMap<>();
-		try (BufferedReader br = new BufferedReader(new FileReader(new File(dir)));) {
+		try (BufferedReader br = new BufferedReader(new InputStreamReader(Thread.currentThread()
+				.getContextClassLoader().getResourceAsStream(dir)));) {
 			String str = null;
 			String[] strs = null;
 			int count = 1;
